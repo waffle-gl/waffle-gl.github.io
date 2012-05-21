@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Waffle/Example</title>
+
+    <link href="waffle.css" rel="stylesheet" type="text/css">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="Generator" content="Vim/7.3">
+    <meta name="plugin-version" content="vim7.3_v10">
+    <meta name="syntax" content="c">
+  </head>
+
+<body>
+
+<h1><img src="waffle.jpg" alt="Yummy waffles"/></h1>
+
+<h2><a href="index.html">Waffle</a>/Example</h2>
+
+<pre class="code">
+<span class="Comment">// This little example program renders to a Wayland window with an OpenGL 3.1</span>
+<span class="Comment">// core profile. The program does not include any GL headers and does not need</span>
+<span class="Comment">// to link to libGL. It declares the needed GL symbols itself and obtains the</span>
+<span class="Comment">// GL functions with waffle_dl_sym().</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;waffle/waffle.h&gt;</span>
+
+<span class="Type">enum</span> {
+    GL_COLOR_BUFFER_BIT = <span class="Constant">0x00004000</span>,
+};
+
+<span class="Type">static</span> <span class="Type">void</span> (*glClearColor)(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+<span class="Type">static</span> <span class="Type">void</span> (*glClear)(GLbitfield mask);
+
+<span class="Type">int</span>
+main()
+{
+    <span class="Type">const</span> <span class="Type">int32_t</span> init_attrs[] = {
+        WAFFLE_PLATFORM, WAFFLE_PLATFORM_WAYLAND,
+        <span class="Constant">0</span>,
+    };
+
+    <span class="Type">const</span> <span class="Type">int32_t</span> config_attrs[] = {
+        WAFFLE_CONTEXT_API,                 WAFFLE_CONTEXT_OPENGL,
+        WAFFLE_CONTEXT_MAJOR_VERSION,       <span class="Constant">3</span>,
+        WAFFLE_CONTEXT_MINOR_VERSION,       <span class="Constant">1</span>,
+        WAFFLE_CONTEXT_PROFILE,             WAFFLE_CONTEXT_CORE_PROFILE,
+
+        WAFFLE_RED_SIZE,            <span class="Constant">8</span>,
+        WAFFLE_BLUE_SIZE,           <span class="Constant">8</span>,
+        WAFFLE_GREEN_SIZE,          <span class="Constant">8</span>,
+
+        <span class="Constant">0</span>,
+    };
+
+    <span class="Comment">// Setup waffle objects.</span>
+    waffle_init(init_attrs);
+    <span class="Type">struct</span> waffle_display *dpy = waffle_display_connect(<span class="Constant">NULL</span>);
+    <span class="Type">struct</span> waffle_config *config = waffle_config_choose(dpy, config_attrs);
+    <span class="Type">struct</span> waffle_window *window = waffle_window_create(dpy, width, height);
+    <span class="Type">struct</span> waffle_context *ctx = waffle_context_create(config, <span class="Constant">NULL</span>);
+
+    glClearColor = waffle_dl_sym(WAFFLE_DL_OPENGL, <span class="Constant">&quot;glClearColor&quot;</span>);
+    glClear = waffle_dl_sym(WAFFLE_DL_OPENGL, <span class="Constant">&quot;glClear&quot;</span>);
+
+    waffle_make_current(dpy, window, ctx);
+
+    glClearColor(<span class="Constant">1.0</span>, <span class="Constant">0.0</span>, <span class="Constant">0.0</span>, <span class="Constant">1.0</span>);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    <span class="Comment">// Swap before showing window so the window content is not garbage.</span>
+    waffle_window_swap_buffers(window);
+    waffle_window_show(window);
+
+    <span class="Comment">// Teardown waffle.</span>
+    waffle_make_current(dpy, <span class="Constant">NULL</span>, <span class="Constant">NULL</span>);
+    waffle_window_destroy(window);
+    waffle_context_destroy(ctx);
+    waffle_config_destroy(config);
+    waffle_display_disconnect(dpy);
+
+    <span class="Statement">return</span> <span class="Constant">0</span>;
+}
+</pre>
+</body>
+</html>
