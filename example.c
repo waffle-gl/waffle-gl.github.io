@@ -1,4 +1,4 @@
-// This little example program renders to a Wayland window with an OpenGL 3.1
+// This little example program renders to a Wayland window with an OpenGL 3.2
 // core profile. The program does not include any GL headers and does not need
 // to link to libGL. It declares the needed GL symbols itself and obtains the
 // GL functions with waffle_dl_sym().
@@ -23,7 +23,7 @@ main()
     const int32_t config_attrs[] = {
         WAFFLE_CONTEXT_API,                 WAFFLE_CONTEXT_OPENGL,
         WAFFLE_CONTEXT_MAJOR_VERSION,       3,
-        WAFFLE_CONTEXT_MINOR_VERSION,       1,
+        WAFFLE_CONTEXT_MINOR_VERSION,       2,
         WAFFLE_CONTEXT_PROFILE,             WAFFLE_CONTEXT_CORE_PROFILE,
 
         WAFFLE_RED_SIZE,            8,

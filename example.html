@@ -19,7 +19,7 @@
 <h2><a href="index.html">Waffle</a>/Example</h2>
 
 <pre class="code">
-<span class="Comment">// This little example program renders to a Wayland window with an OpenGL 3.1</span>
+<span class="Comment">// This little example program renders to a Wayland window with an OpenGL 3.2</span>
 <span class="Comment">// core profile. The program does not include any GL headers and does not need</span>
 <span class="Comment">// to link to libGL. It declares the needed GL symbols itself and obtains the</span>
 <span class="Comment">// GL functions with waffle_dl_sym().</span>
@@ -44,7 +44,7 @@ main()
     <span class="Type">const</span> <span class="Type">int32_t</span> config_attrs[] = {
         WAFFLE_CONTEXT_API,                 WAFFLE_CONTEXT_OPENGL,
         WAFFLE_CONTEXT_MAJOR_VERSION,       <span class="Constant">3</span>,
-        WAFFLE_CONTEXT_MINOR_VERSION,       <span class="Constant">1</span>,
+        WAFFLE_CONTEXT_MINOR_VERSION,       <span class="Constant">2</span>,
         WAFFLE_CONTEXT_PROFILE,             WAFFLE_CONTEXT_CORE_PROFILE,
 
         WAFFLE_RED_SIZE,            <span class="Constant">8</span>,
