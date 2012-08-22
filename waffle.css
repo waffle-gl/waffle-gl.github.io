@@ -17,15 +17,21 @@ h1 img {
   border-width: 0px;
 }
 
-h2 {
+h2,
+h2 > a:link,
+h2 > a:visited,
+h3,
+h3 > a:link,
+h3 > a:visited {
   font-family: sans;
-  color: #666;
+  color: #444;
 }
 
-h3 {
-  font-family: sans;
-  color: #156;
-  font-style: none;
+h2 > a:hover,
+h2 > a:active,
+h3 > a:link,
+h3 > a:visited {
+  color: #c90;
 }
 
 p {
@@ -37,15 +43,18 @@ li {
 }
 
 a {
-  color: #444;
+  text-decoration: none;
 }
 
-a:hover {
-  color: #666;
-}
-
+a:link,
 a:visited {
-  color: #444;
+  color: #028;
+}
+
+a:hover,
+a:active {
+  color: #c90;
+  text-decoration: underline;
 }
 
 /* Code */
