@@ -1,0 +1,134 @@
+Waffle
+Chad Versace
+XDC 2012, Nürnberg
+
+- Problems in testing Mesa
+
+    - Piglit is Mesa's testsuite for OpenGL, OpenCL, EGL, and GLX.
+
+    - (We'll restrict our attention to the GL tests in this talk).
+
+    - Problem Descriptions
+
+        - GLUT
+
+            - (We'll mainly focus on fixing the GLUT problem in this talk).
+
+            - Piglit uses GLUT for GL tests.
+
+            - GLUT is no longer sufficient.
+
+            - On Linux, GLUT supports only GLX and legacy GL contexts.
+
+            - Unwelcome consequences:
+
+                ! Impossible to write Piglit tests for GL core profile.
+
+                ! Piglit contains nearly no GLES tests.
+
+                - Piglit GL tests do not run on X/EGL, Wayland, Android.
+
+        - GLEW
+
+            - Piglit uses GLEW for wrangling GL extensions and dynamic function resolution (dlsym, glXGetProcAddress).
+
+            - GLEW is no longer sufficient.
+
+            - GLEW does not manage GL >= 3.0 well.
+
+            ! GLEW does not support GLES, and cannot easily be extended.
+            
+
+    - Solution
+
+        - Qualities of an ideal solution:
+
+            1. Able to build each test once, then run it on any Linux window
+               system (GLX, X/EGL, Wayland).
+
+            2. Able to multiplex some tests over GL API's.
+
+                - That is, for a subset of tests, build each test once, then run
+                  it under each of GL, GLES2, GLES3, etc.
+
+                - I'm not aware of anyone attemtping this before.
+
+            3. Beneficial to projects other than Piglit.
+
+                - Requires implementing the solution in a Piglit-independent library.
+
+    - Status
+
+        - Solution for #1 is complete, uses libwaffle.
+
+        - Solution for #2 is under development.
+
+        - Support for GL core profile tests arriving before mid-October.
+
+- Waffle
+
+    - Description (What does it do today?)
+
+        - A cross-platform C library that allows GL applications to defer choice
+          of window system until runtime.
+
+        - Its API closely resembles EGL.
+
+        - Contains additional functions...
+
+            - for window creation.
+
+            - for dlsym'ing libGL, libGLES1, libGLES2 in a cross-platform way.
+
+            - for getting at the underlying native objects.
+
+                - This allows clients to implement behavior, such as input, that
+                  is outside of Waffle's scope.
+
+    - Supported platforms:
+
+        - Linux: GLX, X/EGL, Wayland (complete)
+        - Android (experimental)
+        - Apple (experimental)
+        - No MS Windows yet
+
+    - Demo
+
+    - Focus and Purpose
+
+        - Waffle is not GLUT, is not SDL.
+
+        - (see video)
+
+    - Examples
+
+        - Simple GL rendering:
+
+            - http://people.freedesktop.org/~chadversary/waffle/examples/simple-x11-egl.html
+    
+        - Getting at native objects:
+
+            // Assume we've initialized the Waffle with X/EGL.
+            struct waffle_window *window = waffle_window_create(...);
+            struct waffle_x11_egl_window *n_window = waffle_window_get_native(window)->x11_egl;
+
+            Display *xlib_dpy = n_window->display.xlib_display;
+            EGLDisplay *egl_dpy = n_window->display.egl_display;
+            Window xlib_window = n_window->xlib_window;
+            EGLSurface egl_surface = n_window->egl_surface;
+
+    - Future Direction
+
+        - KMS backend with libgbm.
+
+            - Will allow testing Piglit on headless servers in QA infrastructure.
+
+            - On new Intel hardware, will allow Intel Linux OpenGL team to
+              test GL drivers on new hardware before the display is fully
+              working.
+
+        - GL dispatch
+
+            - A dynamic dispatch mechanism for all GL API's that handles GL extensions.
+
+            - A modern replacement for GLEW.
