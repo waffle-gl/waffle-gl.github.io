@@ -1,4 +1,8 @@
+# Zip
 *.bz2
 *.gz
 *.xz
 *.zip
+
+# Media
+*.webm
