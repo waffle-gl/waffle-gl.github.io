@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_attrib_list</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_attrib_list">
+<a name="waffle_attrib_list"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_attrib_list, waffle_attrib_list_length, waffle_attrib_list_get, waffle_attrib_list_get_with_default, waffle_attrib_list_update — Utilities for attribute lists</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">#include &lt;waffle.h&gt;</pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_attrib_list_length</b>(</code></td>
+<td>const int32_t <var class="pdparam">attrib_list</var>[]<code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_attrib_list_get</b>(</code></td>
+<td>const int32_t <var class="pdparam">attrib_list</var>[], </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t <var class="pdparam">key</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t *<var class="pdparam">value</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_attrib_list_get_with_default</b>(</code></td>
+<td>const int32_t <var class="pdparam">attrib_list</var>[], </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t <var class="pdparam">key</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t *<var class="pdparam">value</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t <var class="pdparam">default_value</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_attrib_list_update</b>(</code></td>
+<td>int32_t <var class="pdparam">attrib_list</var>[], </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t <var class="pdparam">key</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t *<var class="pdparam">value</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp59344"></a><h2>Description</h2>
+<p>
+      An attribute list is a zero-terminated list of <span class="type">int32_t</span> key/value pairs or a null pointer. A null
+      pointer is interpreted as an empty list, whose only member is the terminal zero. For concrete examples of
+      attribute lists, see the "Examples" section in
+      <a class="citerefentry" href="waffle_config.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_config</code></span>(3)</span></a>.
+    </p>
+<p>
+      All attribute list functions can be called before waffle has been successfully initialized with
+      <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>.
+    </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="function">waffle_attrib_list_length()</code></span></dt>
+<dd><p>
+            Return the number of key/value pairs in the list.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_attrib_list_get()</code></span></dt>
+<dd><p>
+            Get the <em class="parameter"><code>value</code></em> associated with <em class="parameter"><code>key</code></em>.  If the list does not
+            contain the <em class="parameter"><code>key</code></em>, then <em class="parameter"><code>value</code></em> is not dereferenced.
+            Return true if and only if the list contains the <em class="parameter"><code>key</code></em>.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_attrib_list_get_with_default()</code></span></dt>
+<dd><p>
+            Equivalent to <code class="function">waffle_attrib_list_get()</code> except that if the list does not contain the
+            <em class="parameter"><code>key</code></em> then <em class="parameter"><code>value</code></em> is set to a <em class="parameter"><code>default_value</code></em>.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_attrib_list_update()</code></span></dt>
+<dd><p>
+            Update the <em class="parameter"><code>value</code></em> associated with <em class="parameter"><code>key</code></em>.
+            If the list does not contain the <em class="parameter"><code>key</code></em> then the list is not modified.
+            Return true if and only if the list contains the <em class="parameter"><code>key</code></em>.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp24384"></a><h2>Errors</h2>
+<p>
+      All attribute list functions set the error code to <code class="constant">WAFFLE_NO_ERROR</code> and can be called before
+      waffle has been successfully initialized with
+      <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>.
+    </p>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp27840"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

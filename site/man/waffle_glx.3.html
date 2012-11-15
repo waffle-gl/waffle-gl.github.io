@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_glx</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_glx">
+<a name="waffle_native"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_glx, waffle_glx_display, waffle_glx_config, waffle_glx_context, waffle_glx_window — Containers for underlying native GLX objects</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;waffle_glx.h&gt;
+
+struct waffle_glx_display {
+    Display *xlib_display;
+};
+
+struct waffle_glx_config {
+    Display *xlib_display;
+    GLXFBConfig glx_fbconfig;
+};
+
+struct waffle_glx_context {
+    Display *xlib_display;
+    GLXContext glx_context;
+};
+
+struct waffle_glx_window {
+    Display *xlib_display;
+    XID xlib_window;
+};
+    </pre>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp201344"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>,
+      <a class="citerefentry" href="waffle_native.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_native</span>(3)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,204 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_context</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_context">
+<a name="waffle_context"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_context, waffle_context_create, waffle_context_destroy, waffle_context_get_native — class <code class="classname">waffle_context</code></p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+
+struct waffle_context;
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">struct waffle_context* <b class="fsfunc">waffle_context_create</b>(</code></td>
+<td>struct waffle_config *<var class="pdparam">config</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>struct waffle_context *<var class="pdparam">shared_ctx</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_context_destroy</b>(</code></td>
+<td>struct waffle_context *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">union waffle_native_context* <b class="fsfunc">waffle_context_get_native</b>(</code></td>
+<td>struct waffle_context *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp50352"></a><h2>Description</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><span class="type">struct waffle_context</span></span></dt>
+<dd><p>
+            An opaque type.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_context_create()</code></span></dt>
+<dd>
+<p>
+            Create a context for OpenGL rendering with the properties specified by <em class="parameter"><code>config</code></em>.
+          </p>
+<p>
+            The returned context's actual properties may differ from,
+            but are guaranteed to be compatible with,
+            the properties specified by <em class="parameter"><code>config</code></em>.
+
+            See <a class="xref" href="#sect.version_promotion" title="Version Promotion">the section called “Version Promotion”</a> below for details.
+          </p>
+<p>
+            If <em class="parameter"><code>share_ctx</code></em> is not null, then the newly created context is added to the share group
+            of <em class="parameter"><code>share_ctx</code></em>. Some data, such as display lists, are shared among all contexts
+            that belong to the same share group. For details on what data is shared, see the specification for the
+            relevant native platform:
+            the <a class="ulink" href="http://www.opengl.org/registry/doc/glx1.4.pdf" target="_top">GLX 1.4 Specification</a>,
+            the <a class="ulink" href="http://www.khronos.org/registry/egl/specs/eglspec.1.4.20110406.pdf" target="_top">EGL 1.4 Specification</a>,
+            or the <a class="ulink" href="https://developer.apple.com/library/mac/#documentation/graphicsimaging/reference/CGL_OpenGL/Reference/reference.html" target="_top">CGL Reference</a>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_context_destroy()</code></span></dt>
+<dd><p>
+            Destroy the context and release its memory.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_context_get_native()</code></span></dt>
+<dd><p>
+            Get the context's underlying native objects. Use
+            <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/free.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">free</code></span>(3)</span></a> to deallocate the
+            returned pointer.
+            See <a class="citerefentry" href="waffle_native.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_native</code></span>(3)</span></a>
+            for the definition of <span class="type">union waffle_native_context</span>.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Version Promotion">
+<a name="sect.version_promotion"></a><h2>Version Promotion</h2>
+<p>
+      The context's requested version and profile is given by the config attributes
+
+      <code class="constant">WAFFLE_CONTEXT_MAJOR_VERSION</code>,
+      <code class="constant">WAFFLE_CONTEXT_MINOR_VERSION</code>,
+      <code class="constant">WAFFLE_CONTEXT_PROFILE</code>.
+
+      The context returned by <code class="function">waffle_context_create</code>
+      may implement any version and profile
+      that is backwards compatible with that requested,
+      as described below.
+
+      </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+            If the chosen API is
+            <code class="constant">WAFFLE_OPENGL_ES1</code>,
+            <code class="constant">WAFFLE_OPENGL_ES2</code>, or
+            <code class="constant">WAFFLE_OPENGL_ES3</code>,
+
+            then the returned context may implement any of:
+
+            </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>* The requested version.</td></tr>
+<tr><td>* Any later version, so long as no features have been from that later version.</td></tr>
+</table>
+<p>
+          </p>
+</li>
+<li class="listitem">
+<p>
+            If the chosen API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+
+            and version 3.0 or less is requested,
+
+            then the returned context may implement any of:
+
+            </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>* Any version no less than that requested and no greater than 3.0.</td></tr>
+<tr><td>* Version 3.1, if the GL_ARB_compatibility extension is also implemented.</td></tr>
+<tr><td>* The compatibility profile of version 3.2 or greater.</td></tr>
+</table>
+<p>
+          </p>
+</li>
+<li class="listitem">
+<p>
+            If the chosen API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+
+            and version 3.1 is requested,
+
+            then the returned context may implement any of:
+
+            </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>* Version 3.1, with or without the GL_ARB_compatibility extension.</td></tr>
+<tr><td>* The core profile of version 3.2 or greater.</td></tr>
+</table>
+<p>
+          </p>
+</li>
+<li class="listitem">
+<p>
+            If the chosen API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+
+            and version 3.2 or greater is requested,
+
+            then the returned context may implement any of:
+
+            </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>* The requested profile and version.</td></tr>
+<tr><td><p>
+                  * The requested profile of any later version, so long as no features have been from that later
+                  version and profile.
+              </p></td></tr>
+</table>
+<p>
+          </p>
+</li>
+</ul></div>
+<p>
+    </p>
+</div>
+<div class="refsect1" title="Return Value">
+<a name="idp41392"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp42720"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<p>
+      No errors are specific to the <span class="type">waffle_context</span> functions.
+    </p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp44928"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+      <a class="citerefentry" href="waffle_config.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_config_choose</span>(3)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

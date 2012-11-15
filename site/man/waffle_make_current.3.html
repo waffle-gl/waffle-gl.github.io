@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_make_current</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_make_current">
+<a name="waffle_make_current"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_make_current — Bind a context for rendering</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_make_current</b>(</code></td>
+<td>struct waffle_display *<var class="pdparam">display</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>struct waffle_window *<var class="pdparam">window</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>struct waffle_context *<var class="pdparam">context</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp108832"></a><h2>Description</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="function">waffle_make_current()</code></span></dt>
+<dd>
+<p>
+            Bind the given <em class="parameter"><code>window</code></em> and <em class="parameter"><code>context</code></em>
+
+            for rendering on the current thread.
+
+            <em class="parameter"><code>window</code></em> and <em class="parameter"><code>context</code></em>
+
+            must both have been created on the given <em class="parameter"><code>display</code></em>.
+
+            To unbind the current context without binding a new one,
+
+            set <em class="parameter"><code>window</code></em> and <em class="parameter"><code>context</code></em> to <code class="constant">NULL</code>.
+          </p>
+<p>
+            This function is analogous to
+
+            <a class="citerefentry" href="http://www.opengl.org/sdk/docs/man2/xhtml/glXMakeCurrent.xml"><span class="citerefentry"><span class="refentrytitle"><code class="function">glXMakeCurrent</code></span>(3)</span></a>,
+            <a class="citerefentry" href="http://www.khronos.org/registry/egl/sdk/docs/man/xhtml/eglMakeCurrent.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">eglMakeCurrent</code></span>(3)</span></a>, and
+            <code class="function">[NSOpenGLContext makeCurrentContext]</code>.
+          </p>
+</dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Return Value">
+<a name="idp3974480"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp3975808"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<p>
+      No errors are specific to any functions listed in this manual page.
+    </p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp3977520"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

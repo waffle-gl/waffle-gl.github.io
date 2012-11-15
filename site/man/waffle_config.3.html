@@ -1,0 +1,463 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_config</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_config">
+<a name="waffle_config"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_config, waffle_config_choose, waffle_config_destroy, waffle_config_get_native — class <code class="classname">waffle_config</code></p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+
+struct waffle_config;
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">struct waffle_config* <b class="fsfunc">waffle_config_choose</b>(</code></td>
+<td>struct waffle_display *<var class="pdparam">display</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>const int32_t <var class="pdparam">attrib_list</var>[]<code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_config_destroy</b>(</code></td>
+<td>struct waffle_config *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">union waffle_native_config* <b class="fsfunc">waffle_config_get_native</b>(</code></td>
+<td>struct waffle_config *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp50512"></a><h2>Description</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><span class="type">struct waffle_config</span></span></dt>
+<dd><p>
+            An opaque type.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_config_choose()</code></span></dt>
+<dd>
+<p>
+            Choose a config on <em class="parameter"><code>display</code></em> that satifisfies the set of attributes specified by
+            <em class="parameter"><code>attrib_list</code></em>.
+
+            The config can later be used to create surfaces and contexts with
+
+            <a class="citerefentry" href="waffle_window.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_window_create</code></span>(3)</span></a> and
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>.
+          </p>
+<p>
+            <em class="parameter"><code>attrib_list</code></em> consists of a zero-terminated sequence of name/value pairs.  If an
+            attribute is absent from <em class="parameter"><code>attrib_list</code></em>, then it assumes its default value.  If
+            <em class="parameter"><code>attrib_list</code></em> is null, then it is intrepreted the same as the empty list, which is the
+            list that contains only the terminal zero.
+
+            See <a class="xref" href="#sect.attributes" title="Attributes">the section called “Attributes”</a> below for details on the set of attributes that may appear in
+            <em class="parameter"><code>attrib_list</code></em>.
+          </p>
+<p>
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_config_destroy()</code></span></dt>
+<dd><p>
+            Destroy the config and release its memory.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_config_get_native()</code></span></dt>
+<dd><p>
+            Get the config's underlying native objects. Use
+            <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/free.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">free</code></span>(3)</span></a> to deallocate the
+            returned pointer.
+            See <a class="citerefentry" href="waffle_native.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_native</span>(3)</span></a>
+            for the definition of <span class="type">union waffle_native_config</span>.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Discussion">
+<a name="idp25376"></a><h2>Discussion</h2>
+<p>
+      The context attributes (<code class="constant">WAFFLE_CONTEXT_*</code>) have quirks that are specific to the native
+      platform. Waffle attempts to accomdate those quirks in a platform-neutral way as much as possible, but not all
+      quirks can be eliminated through a platform abstraction layer. The quirks are documented below in detail.
+    </p>
+<p>
+      For example, one quirk that Waffle is able to accommodate is that some platforms require specification of context
+      attributes at different times.  GLX requires that the context attributes be specified at time of context creation
+      [<a class="citerefentry" href="http://www.opengl.org/sdk/docs/man2/xhtml/glXCreateContextAttribsARB.xml"><span class="citerefentry"><span class="refentrytitle"><code class="function">glXCreateContextAttribsARB</code></span>(3)</span></a>]
+      but MacOS requires the attributes to be specified when choosing
+      a config [<code class="function">CGLChoosePixelFormat</code>].  Therefore, Waffle is constrained by MacOS to require the
+      attributes at time of <code class="function">waffle_config_choose()</code>.
+    </p>
+<p>
+      For additional documentation on the behavior of context attributes on each platform, refer to the following:
+
+      </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td><p>
+            For GLX, refer to the
+            <a class="ulink" href="http://www.opengl.org/registry/doc/glx1.4.pdf" target="_top">GLX 1.4 Specification</a>
+            and the specifications for extensions
+            <a class="ulink" href="http://www.opengl.org/registry/specs/ARB/glx_create_context.txt" target="_top">GLX_ARB_create_context_profile</a> and
+            <a class="ulink" href="http://www.opengl.org/registry/specs/EXT/glx_create_context_es2_profile.txt" target="_top">GLX_EXT_create_context_es2_profile</a>.
+        </p></td></tr>
+<tr><td><p>
+            For EGL, refer to the
+            <a class="ulink" href="http://www.khronos.org/registry/egl/specs/eglspec.1.4.20110406.pdf" target="_top">EGL 1.4 Specification</a>
+            and the specifications for extension
+            <a class="ulink" href="http://www.khronos.org/registry/egl/extensions/KHR/EGL_KHR_create_context.txt" target="_top">EGL_KHR_create_context</a>.
+        </p></td></tr>
+<tr><td><p>
+            For CGL, refer to the documentation of <code class="function">kCGLPFAOpenGLProfile</code> in the
+            <a class="ulink" href="https://developer.apple.com/library/mac/#documentation/graphicsimaging/reference/CGL_OpenGL/Reference/reference.html" target="_top">CGL Reference</a>.
+        </p></td></tr>
+</table>
+<p>
+    </p>
+</div>
+<div class="refsect1" title="Attributes">
+<a name="sect.attributes"></a><h2>Attributes</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="constant">WAFFLE_CONTEXT_API</code></span></dt>
+<dd>
+<p>
+            This is a required attribute; it has no default value. It must be one of:
+            </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td><code class="constant">WAFFLE_CONTEXT_OPENGL</code></td></tr>
+<tr><td><code class="constant">WAFFLE_CONTEXT_OPENGL_ES1</code></td></tr>
+<tr><td><code class="constant">WAFFLE_CONTEXT_OPENGL_ES2</code></td></tr>
+<tr><td><code class="constant">WAFFLE_CONTEXT_OPENGL_ES3</code></td></tr>
+</table>
+<p>
+          </p>
+<p>
+            The actual set of supported values depends on the native platform.  To check if the system supports a given
+            API, use
+            <a class="citerefentry" href="waffle_display.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_display_supports_context_api</code></span>(3)</span></a>.
+            Invariants and expectations for each platform are discussed below.
+          </p>
+<p>
+            On Android, <code class="constant">WAFFLE_CONTEXT_OPENGL_ES1</code> is always supported.  Beginning with Ice Cream
+            Sandwich (that is, Android 4.0), <code class="constant">WAFFLE_CONTEXT_OPENGL_ES2</code> is also supported.  Use
+            <a class="citerefentry" href="waffle_display.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_display_supports_context_api</code></span>(3)</span></a>
+            to check if additional APIs are supported.
+          </p>
+<p>
+            On GLX, <code class="constant">WAFFLE_CONTEXT_OPENGL</code> is always supported. The system may optionally support
+            additional APIs.
+          </p>
+<p>
+            On EGL platforms other than Android, no API is guaranteed to be supported. One must use
+            <a class="citerefentry" href="waffle_display.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_display_supports_context_api</code></span>(3)</span></a>
+            to check for supported APIs.
+          </p>
+<p>
+            On MacOS, only <code class="constant">WAFFLE_CONTEXT_OPENGL</code> is supported. This may change in the future if
+            Apple adds support for additional APIs.
+          </p>
+</dd>
+<dt>
+<span class="term"><code class="constant">WAFFLE_CONTEXT_MAJOR_VERSION</code><br></span><span class="term"><code class="constant">WAFFLE_CONTEXT_MINOR_VERSION</code></span>
+</dt>
+<dd>
+<p>
+            This pair of attributes is optional.
+
+            They specify the context version that
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            will request.
+          </p>
+<p>
+            The pair's default value and set of accepted values depend on the value of
+            <code class="constant">WAFFLE_CONTEXT_API</code> and the native platform.
+
+            Below is described in detail the rules by which waffle filters the set of accepted values according to the
+            value of <code class="constant">WAFFLE_CONTEXT_API</code>.
+
+            Even if <code class="function">waffle_config_choose()</code> accepts the requested version
+            and successfully returns a config,
+
+            the native platform may later reject the requested version when
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            is called.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL_ES1</code>,
+            then the default value is 1.0.
+
+            The only accepted values are 1.0 and 1.1.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL_ES2</code>,
+            then the default value is 2.0.
+
+            Waffle accepts any value that is at least 2.0 and strictly less than 3.0.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL_ES3</code>,
+            then the default value is 3.0.
+
+            Waffle accepts any value that is at least 3.0 and strictly less than 4.0.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>,
+            then the default and minimum accepted value is 1.0.
+          </p>
+</dd>
+<dt><span class="term"><code class="constant">WAFFLE_CONTEXT_PROFILE</code></span></dt>
+<dd>
+<p>
+            This attributes is optional.
+
+            It specifies the context profile that
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            will request.
+          </p>
+<p>
+            The attribute's default value and set of accepted values depend on the values of
+            <code class="constant">WAFFLE_CONTEXT_API</code>,
+            <code class="constant">WAFFLE_CONTEXT_MAJOR_VERSION</code>,
+            <code class="constant">WAFFLE_CONTEXT_MINOR_VERSION</code>,
+            and the native platform.
+
+            Below is described in detail the rules by which waffle decides
+
+            the default value and the set of accepted values.
+
+            Even if <code class="function">waffle_config_choose()</code> accepts the requested profile
+            and successfully returns a config,
+
+            the native platform may later reject the requested profile when
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            is called.
+          </p>
+<p>
+            If the requested API is
+            <code class="constant">WAFFLE_CONTEXT_OPENGL_ES1</code>,
+            <code class="constant">WAFFLE_CONTEXT_OPENGL_ES2</code>, or
+            <code class="constant">WAFFLE_CONTEXT_OPENGL_ES3</code>,
+
+            then the default and only accepted value is <code class="constant">WAFFLE_NONE</code>.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+
+            and the requested version is less than 3.2,
+
+            then the default and only accepted value is <code class="constant">WAFFLE_NONE</code>.
+          </p>
+<p>
+            If the requested API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+
+            and the requested version is at least 3.2,
+
+            then default value is <code class="constant">WAFFLE_CONTEXT_CORE_PROFILE</code>.
+
+            The set of accepted values is
+
+            <code class="constant">WAFFLE_CONTEXT_PROFILE_CORE</code> and
+            <code class="constant">WAFFLE_CONTEXT_PROFILE_COMPATIBILITY</code>.
+          </p>
+</dd>
+<dt>
+<span class="term"><code class="constant">WAFFLE_RED_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_GREEN_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_BLUE_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_ALPHA_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_DEPTH_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_STENCIL_SIZE</code></span>
+</dt>
+<dd><p>
+            The default value for each size attribute is <code class="constant">WAFFLE_DONT_CARE</code>. If the requested size
+            for a channel is 0, then any surface created with the config will lack that channel. If the requested size
+            for a channel is positive, then the number of bits in that channel for any surface created with the config
+            will be at least the requested size.
+          </p></dd>
+<dt>
+<span class="term"><code class="constant">WAFFLE_SAMPLE_BUFFERS</code><br></span><span class="term"><code class="constant">WAFFLE_SAMPLES</code></span>
+</dt>
+<dd><p>
+            The valid values for <code class="constant">WAFFLE_SAMPLE_BUFFERS</code> are true and false. The default value is
+            false. If false, then any surface created with the config will not be multisampled. If true, the any surface
+            created with the config will be multisampled, where the number of samples will be at least
+            <code class="constant">WAFFLE_SAMPLES</code>. The default value of <code class="constant">WAFFLE_SAMPLES</code> is 0.
+          </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_DOUBLE_BUFFERED</code></span></dt>
+<dd><p>
+            The valid values are true and false. The default is true. This attribute specifies if a surface created with
+            this config is double-buffered.
+          </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ACCUM_BUFFER</code></span></dt>
+<dd><p>
+            The valid values are true and false. The default is false. This attribute specifies if a surface created with
+            this config possesses an accumulation buffer.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Return Value">
+<a name="idp4792464"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp4793728"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<p>
+      Listed below are the errors specific to the <span class="type">waffle_config</span> functions.
+    </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="function">waffle_config_choose()</code></span></dt>
+<dd><div class="variablelist"><dl>
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_BAD_ATTRIBUTE</span></span></dt>
+<dd><p>
+                  An item in <em class="parameter"><code>attrib_list</code></em> is unrecognized or has an invalid value, or a required
+                  attribute is missing.
+                </p></dd>
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_UNSUPPORTED_ON_PLATFORM</span></span></dt>
+<dd>
+<p>
+                  If the native platform does not expose the necessary functionality to create a context with the
+                  properties specified by config
+
+                  or if waffle can predetermine that the native platform will reject the config at context creation,
+
+                  but otherwise the requested attributes are valid,
+
+                  then <code class="constant">WAFFLE_ERROR_UNSUPPORTED_ON_PLATFORM</code> is emitted.
+                </p>
+<p>
+                  For example,
+
+                  </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>
+                        GLX supports creation of an OpenGL ES2 context only if libGLESv2.so is installed and if
+                        GLX_EXT_create_context_es2_profile is exposed as both a server and client extension.
+                      </p></li>
+<li class="listitem"><p>
+                      MacOS does not support the OpenGL 3.2 Compatibility Profile, and it supports the OpenGL 3.2 Core Profile
+                      only for MacOS &gt;= 10.7 on select GPU's.
+                    </p></li>
+</ul></div>
+<p>
+                </p>
+</dd>
+</dl></div></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Examples">
+<a name="idp4806608"></a><h2>Examples</h2>
+<div class="refsect2" title="Example 1">
+<a name="idp4807248"></a><h3>Example 1</h3>
+<p>
+        Choose a config for an OpenGL legacy context that has at least 8 bits in each of the RGBA channels.
+
+        </p>
+<pre class="programlisting">
+
+#include &lt;stdlib.h&gt;
+#include &lt;waffle.h&gt;
+
+static const int32_t init_attrib_list[] = {
+    WAFFLE_PLATFORM, WAFFLE_PLATFORM_GLX,
+    0,
+};
+
+static const int32_t config_attrib_list[] = {
+    WAFFLE_CONTEXT_API, WAFFLE_CONTEXT_OPENGL,
+
+    WAFFLE_RED_SIZE,    8,
+    WAFFLE_GREEN_SIZE,  8,
+    WAFFLE_BLUE_SIZE,   8,
+    WAFFLE_ALPHA_SIZE,  8,
+
+    0,
+};
+
+int
+main()
+{
+    struct waffle_display *display;
+    struct waffle_config *config;
+    bool ok;
+
+
+    ok = waffle_init(init_attrib_list);
+    if (!ok)
+      exit(EXIT_FAILURE);
+
+    display = waffle_display_connect(NULL);
+    if (!display)
+      exit(EXIT_FAILURE);
+
+    config = waffle_config_choose(config_attrib_list);
+    if (!config)
+      exit(EXIT_FAILURE);
+
+    // Now clean up.
+    waffle_config_destroy(config);
+    waffle_display_disconnect(display);
+    return EXIT_SUCCESS;
+}
+
+        </pre>
+<p>
+      </p>
+</div>
+<div class="refsect2" title="Example 2">
+<a name="idp4809152"></a><h3>Example 2</h3>
+<p>
+        An attribute list for creating an OpenGL 3.2 Core Profile context that has depth and stencil buffers and some
+        non-zero number of bits in each of the RGB channels.  Since the default value of
+        <code class="constant">WAFFLE_ALPHA_SIZE</code> is <code class="constant">WAFFLE_DONT_CARE</code>, the config may not have an
+        alpha channel.
+
+        </p>
+<pre class="programlisting">
+
+const int32_t attrib_list[] = {
+    WAFFLE_CONTEXT_API,             WAFFLE_CONTEXT_OPENGL,
+    WAFFLE_CONTEXT_MAJOR_VERSION,   3,
+    WAFFLE_CONTEXT_MINOR_VERSION,   2,
+    WAFFLE_CONTEXT_PROFILE,         WAFFLE_CONTEXT_CORE_PROFILE,
+
+    WAFFLE_RED_SIZE,                1,
+    WAFFLE_GREEN_SIZE,              1,
+    WAFFLE_BLUE_SIZE,               1,
+
+    WAFFLE_DEPTH_SIZE,             24,
+    WAFFLE_STENCIL_SIZE,            8,
+
+    0,
+};
+
+        </pre>
+<p>
+      </p>
+</div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idm37360"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+      <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_context_create</span>(3)</span></a>
+      <a class="citerefentry" href="waffle_window.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_window_create</span>(3)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

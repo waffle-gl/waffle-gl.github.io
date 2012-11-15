@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_init</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_init">
+<a name="waffle_init"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_init — Initialize waffle's per-process global state</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">#include &lt;waffle.h&gt;</pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_init</b>(</code></td>
+<td>const int32_t <var class="pdparam">attrib_list</var>[]<code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp25179168"></a><h2>Description</h2>
+<p>
+      <code class="function">waffle_init()</code> initializes the per-process global state of the waffle library with the
+      attributes specified in <em class="parameter"><code>attrib_list</code></em>.  The set of attributes is documented below.
+      <em class="parameter"><code>attrib_list</code></em> consists of a zero-terminated sequence of name/value pairs.
+    </p>
+<p>
+      Most waffle functions emit an error if called when waffle is unitialized.  The small set of functions that can be
+      successfully called before initialization are explicitly documented as such.
+    </p>
+<p>
+      If a call to <code class="function">waffle_init()</code> fails, no global state is initialized and the caller may safely
+      attempt to call <code class="function">waffle_init()</code> again.  If waffle has already been initialized by a successful
+      call to <code class="function">waffle_init()</code>, then calling <code class="function">waffle_init()</code> again emits the error
+      <span class="errorcode">WAFFLE_ERROR_ALREADY_INITIALIZED</span>.
+    </p>
+</div>
+<div class="refsect1" title="Attributes">
+<a name="idp25187264"></a><h2>Attributes</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM</code></span></dt>
+<dd>
+<p>
+            This attribute is required. Possible values are:
+
+            </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_ANDROID</code></span></dt>
+<dd><p>
+                    [Android] Use EGL on Android.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_GBM</code></span></dt>
+<dd><p>
+                    [Linux] Use EGL with GBM, the "Generic Buffer Manager" provided by libgbm. This platform is
+                    capable of OpenGL rendering without a display manager.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_CGL</code></span></dt>
+<dd><p>
+                    [MacOS] Use CGL to create the
+                    <a class="citerefentry" href="waffle_config.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_config</code></span>(3)</span></a>
+                    and
+                    <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context</code></span>(3)</span></a>.
+                    Use Cocoa to create the
+                    <a class="citerefentry" href="waffle_window.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_window</code></span>(3)</span></a>.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_GLX</code></span></dt>
+<dd><p>
+                    [Linux only, MacOS not yet supported]
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_WAYLAND</code></span></dt>
+<dd><p>
+                    [Linux] Use EGL with the Wayland display server.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_X11_EGL</code></span></dt>
+<dd><p>
+                    [Linux] Use EGL with the X11 display server.
+                  </p></dd>
+</dl></div>
+<p>
+          </p>
+</dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Return Value">
+<a name="idp29061200"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp29062528"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<p>
+      Listed are the errors specific to <code class="function">waffle_init()</code>.
+    </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_ALREADY_INITIALIZED</span></span></dt>
+<dd><p>
+            Waffle has already been initialized with a successfull call to <code class="function">waffle_init()</code>.
+          </p></dd>
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_BAD_ATTRIBUTE</span></span></dt>
+<dd><p>
+            An item in <em class="parameter"><code>attrib_list</code></em> is unrecognized or has an invalid value, or a required
+            attribute is missing.
+          </p></dd>
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_BUILT_WITHOUT_SUPPORT</span></span></dt>
+<dd><p>
+            Waffle was built without support for the requested attribute.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Example">
+<a name="idp25159792"></a><h2>Example</h2>
+<p>
+      Initialize waffle for X11/EGL.
+    </p>
+<pre class="programlisting">
+
+#include &lt;waffle.h&gt;
+
+static const int32_t init_attrib_list[] = {
+    WAFFLE_PLATFORM, WAFFLE_PLATFORM_X11_EGL,
+    0,
+};
+
+int
+main()
+{
+    bool ok = waffle_init(init_attrib_list);
+    if (ok)
+        return EXIT_SUCCESS;
+    else
+        return EXIT_FAILURE;
+}
+
+    </pre>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp25161664"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

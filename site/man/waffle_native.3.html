@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_native</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_native">
+<a name="waffle_native"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_native, waffle_native_display, waffle_native_config, waffle_native_context, waffle_native_window — Containers for underlying native objects</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;waffle.h&gt;
+
+union waffle_native_display {
+    struct waffle_gbm_display *gbm;
+    struct waffle_glx_display *glx;
+    struct waffle_wayland_display *wayland;
+    struct waffle_x11_egl_display *x11_egl;
+};
+
+union waffle_native_config {
+    struct waffle_gbm_config *gbm;
+    struct waffle_glx_config *glx;
+    struct waffle_wayland_config *wayland;
+    struct waffle_x11_egl_config *x11_egl;
+};
+
+union waffle_native_context {
+    struct waffle_gbm_context *gbm;
+    struct waffle_glx_context *glx;
+    struct waffle_wayland_context *wayland;
+    struct waffle_x11_egl_context *x11_egl;
+};
+
+union waffle_native_window {
+    struct waffle_gbm_window *gbm;
+    struct waffle_glx_window *glx;
+    struct waffle_wayland_window *wayland;
+    struct waffle_x11_egl_window *x11_egl;
+};
+    </pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp202192"></a><h2>Description</h2>
+<p>
+      Each of the <code class="function">waffle_${obj}_get_native()</code> functions returns a correspondingly named
+      <span class="type">union waffle_native_${obj}*</span>.
+      For example, <code class="function">waffle_window_get_native()</code> returns <span class="type">union waffle_native_window*</span>
+    </p>
+<p>
+      For each platform, the header <code class="filename">&lt;waffle_${platform}.h&gt;</code> defines the native container structs.  For
+      example, <code class="filename">&lt;waffle_glx.h&gt;</code> defines the structs <span class="type">waffle_glx_${obj}</span>.
+    </p>
+<p>
+      Observerve that native container structs are not defined for all platforms that waffle supports. In
+      particular, waffle supports Android (<code class="constant">WAFFLE_PLATFORM_ANDROID</code>) and MacOS via CGL
+      (<code class="constant">WAFFLE_PLATFORM_CGL</code>), but no container structs are defined for those platforms.
+      Presently, waffle does not expose the native objects for those platforms due to implementation difficulties.
+    </p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp51040"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>,
+      <a class="citerefentry" href="waffle_gbm.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_gbm</span>(3)</span></a>,
+      <a class="citerefentry" href="waffle_glx.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_glx</span>(3)</span></a>,
+      <a class="citerefentry" href="waffle_wayland.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_wayland</span>(3)</span></a>,
+      <a class="citerefentry" href="waffle_x11_egl.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_x11_egl</span>(3)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_is_extension_in_string</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_is_extension_in_string">
+<a name="waffle_is_extension_in_string"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_is_extension_in_string — Check if a name appears in an OpenGL-style extension string</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_is_extension_in_string</b>(</code></td>
+<td>const char *restrict <var class="pdparam">extension_string</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>const char *restrict <var class="pdparam">extension_name</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp25180592"></a><h2>Description</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="function">waffle_is_extension_in_string()</code></span></dt>
+<dd>
+<p>
+            Check if an extension name appears in an OpenGL-style extension string.
+          </p>
+<p>
+            The <em class="parameter"><code>extension_string</code></em> must be
+
+            in the format returned by <code class="code">glGetString(GL_EXTENSIONS)</code>.
+
+            Note that this function is not restricted to the GL extension string;
+
+            it can also be used on the GLX and EGL extension strings.
+          </p>
+<p>
+            This function can be called before waffle has been successfully initialized with
+
+            <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>.
+          </p>
+</dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp25187424"></a><h2>Errors</h2>
+<p>
+      This function sets the error code to <code class="constant">WAFFLE_NO_ERROR</code>.
+    </p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp25189056"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

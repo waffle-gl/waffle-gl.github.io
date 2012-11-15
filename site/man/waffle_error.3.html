@@ -1,0 +1,203 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_init</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_init">
+<a name="waffle_init"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_error, waffle_error_get_info, waffle_error_get_code, waffle_error_to_string — Thread-local error state</p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+
+enum waffle_error {...};
+
+struct waffle_error_info {
+    int32_t code;
+    const char *message;
+    size_t message_length;
+};
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">const struct waffle_error_info* <b class="fsfunc">waffle_error_get_info</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">int32_t <b class="fsfunc">waffle_error_get_code</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">const char* <b class="fsfunc">waffle_error_to_string</b>(</code></td>
+<td>int32_t <var class="pdparam">e</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp111536"></a><h2>Description</h2>
+<p>
+      Waffle functions usually return either a <span class="type">bool</span>, in which false indicates failure, or a pointer, in
+      which null indicates failure. In addition to returning a flag indicating failure, most functions also clear and
+      then set some thread-local error state.
+    </p>
+<p>
+      The only functions that do not alter waffle's error state are listed here and are explicitly documented as such.
+      All functions listed here can be called before waffle has been successfully initialized with
+      <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>
+    </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><span class="type">struct waffle_error_info</span></span></dt>
+<dd>
+<p>
+            This struct contains the user-visible portion of waffle's thread-local error state.
+          </p>
+<p>
+            <em class="structfield"><code>code</code></em> may be any token from <span class="type">enum waffle_error</span>.
+          </p>
+<p>
+            <em class="structfield"><code>message</code></em> often contains a descriptive message about the error.
+            It is never null, though it may be the empty string.
+          </p>
+<p>
+            <em class="structfield"><code>message_length</code></em> is the length of <em class="structfield"><code>message</code></em> according to
+            <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/strlen.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">strlen</code></span>(3)</span></a>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_error_to_string()</code></span></dt>
+<dd>
+<p>
+            Convert a <span class="type">waffle_error</span> token to a string.
+            For example, convert <code class="constant">WAFFLE_ERROR_UNKNOWN</code> to <code class="code">"WAFFLE_ERROR_UNKNOWN"</code>.
+            Return null if the token is not a valid error token.
+          </p>
+<p>
+            This function always sets the error code to <code class="constant">WAFFLE_ERROR_NONE</code>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_error_get_info()</code></span></dt>
+<dd>
+<p>
+            Get information about the current thread's error state.
+          </p>
+<p>
+            This function never returns null. The returned pointer becomes invalid when the thread-local error state
+            changes.
+          </p>
+<p>
+            This function does not alter waffle's error state.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_error_get_code()</code></span></dt>
+<dd>
+<p>
+            Get the current thread's error code. Calling this function is equivalent to obtaining the error code with
+            <code class="code">waffle_error_get_info()-&gt;code</code>.
+          </p>
+<p>
+            This function does not alter waffle's error state.
+          </p>
+</dd>
+<dt><span class="term"><span class="type">enum waffle_error</span></span></dt>
+<dd>
+<p>
+            For reference, below is the complete list of waffle's error codes.
+
+            </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="constant">WAFFLE_NO_ERROR</code> = 0x00</span></dt>
+<dd><p>
+                    The function succeeded.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_FATAL</code> = 0x01</span></dt>
+<dd><p>
+                    Waffle encountered a fatal error.  All future waffle calls result in
+                    undefined behavior.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_UNKNOWN</code> = 0x02</span></dt>
+<dd><p>
+                    Waffle encountered an error for which it lacks an error code.  This is
+                    usually produced when an underlying native call, such as
+                    <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/XOpenDisplay.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">XOpenDisplay</code></span>(3)</span></a>,
+                    fails for an unknown reason.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_INTERNAL</code> = 0x03</span></dt>
+<dd><p>
+                    You found a bug in waffle.  Please report it.  The error message, obtained by
+                    <code class="function">waffle_error_get_info()</code>, should contain a description of the bug.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_BAD_ALLOC</code> = 0x04</span></dt>
+<dd><p>
+                    Waffle failed to allocate memory.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_NOT_INITIALIZED</code> = 0x05</span></dt>
+<dd><p>
+                    The failed function requires waffle to be initialized with
+                    <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_ALREADY_INITIALIZED</code> = 0x06</span></dt>
+<dd><p>
+                    If waffle has already been initialized by a successful call to
+                    <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>,
+                    then subsequent calls to <code class="function">waffle_init()</code> produce this error.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_BAD_ATTRIBUTE</code> = 0x08</span></dt>
+<dd><p>
+                    An unrecognized attribute name or attribute value was passed in an
+                    attribute list.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_BAD_PARAMETER</code> = 0x10</span></dt>
+<dd><p>
+                    The failed function was passed an invalid argument.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_BAD_DISPLAY_MATCH</code> = 0x11</span></dt>
+<dd><p>
+                    The waffle objects passed to the failed function belong to different
+                    displays.
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_UNSUPPORTED_ON_PLATFORM</code> = 0x12</span></dt>
+<dd>
+<p>
+                    The requested action is unsupported on the current system or platform, but is otherwise valid.
+                  </p>
+<p>
+                    For example, attempting to choose a <span class="type">waffle_config</span> whose API is OpenGL ES1 on a system
+                    that doesn't OpenGL ES1 will produce this error.
+                  </p>
+</dd>
+<dt><span class="term"><code class="constant">WAFFLE_ERROR_BUILT_WITHOUT_SUPPORT</code> = 0x13</span></dt>
+<dd>
+<p>
+                    Waffle was built without support for the requested action.
+                  </p>
+<p>
+                    For example, if waffle was built without support for GBM, then calling <code class="code">waffle_init()</code>
+                    with attribute <code class="code">WAFFLE_PLATFORM=WAFFLE_PLATFORM_GBM</code> will produce this error.
+                </p>
+</dd>
+</dl></div>
+<p>
+          </p>
+</dd>
+</dl></div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp5055456"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>

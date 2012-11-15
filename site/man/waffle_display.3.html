@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_display</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_display">
+<a name="waffle_display"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_display, waffle_display_connect, waffle_display_disconnect, waffle_display_supports_context_api, waffle_display_get_native — class <code class="classname">waffle_display</code></p>
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">
+#include &lt;waffle.h&gt;
+
+struct waffle_display;
+      </pre>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">struct waffle_display* <b class="fsfunc">waffle_display_connect</b>(</code></td>
+<td>const char* <var class="pdparam">name</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_display_disconnect</b>(</code></td>
+<td>struct waffle_display *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_display_supports_context_api</b>(</code></td>
+<td>struct waffle_display *<var class="pdparam">self</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>int32_t <var class="pdparam">context_api</var><code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<td><code class="funcdef">union waffle_native_display* <b class="fsfunc">waffle_display_get_native</b>(</code></td>
+<td>struct waffle_display *<var class="pdparam">self</var><code>)</code>;</td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1" title="Description">
+<a name="idp25166048"></a><h2>Description</h2>
+<div class="variablelist"><dl>
+<dt><span class="term"><span class="type">struct waffle_display</span></span></dt>
+<dd><p>
+            An opaque type.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_display_connect()</code></span></dt>
+<dd>
+<p>
+            Connect to a display. The interpretation of <em class="parameter"><code>name</code></em> differs according to the platform
+            given to <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>.
+          </p>
+<p>
+            On Android and CGL, <em class="parameter"><code>name</code></em> is ignored.
+          </p>
+<p>
+            On the X11 platforms, GLX and X11/EGL, the function connects to the X11 display with the given
+            <em class="parameter"><code>name</code></em>. If <em class="parameter"><code>name</code></em> is null, then it uses the value of the
+            environment variable <code class="envar">DISPLAY</code>.
+          </p>
+<p>
+            On Wayland, the function connects to the Wayland display with the given name. If <em class="parameter"><code>name</code></em> is null, then it
+            uses the value of the environment variable <code class="envar">WAYLAND_DISPLAY</code>.
+          </p>
+<p>
+            On GBM, the function opens the device at the filepath <em class="parameter"><code>name</code></em>. If
+            <em class="parameter"><code>name</code></em> is null, then it iterates using udev through the set of card devices in the drm
+            subsystem, which are usually located in <code class="filename">/dev/dri</code>, and attempts to open each in turn
+            with <code class="code">open(O_RDWR | O_CLOEXEC)</code> until successful.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_display_disconnect()</code></span></dt>
+<dd><p>
+            Disconnect from the <span class="type">waffle_display</span> and release it's memory. All pointers to waffle objects that
+            were created with the display become invalid.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_display_supports_context_api()</code></span></dt>
+<dd><p>
+            Check if the display is capable of creating
+            a <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context</code></span>(3)</span></a> with
+            the given <em class="parameter"><code>context_api</code></em>. See
+            <a class="citerefentry" href="waffle_config.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_config</code></span>(3)</span></a> for
+            choices of <em class="parameter"><code>context_api</code></em> and expectations for each platform.
+          </p></dd>
+<dt><span class="term"><code class="function">waffle_display_get_native()</code></span></dt>
+<dd><p>
+            Get the display's underlying native objects. Use
+            <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/free.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">free</code></span>(3)</span></a> to deallocate the
+            returned pointer.
+            See <a class="citerefentry" href="waffle_native.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_native</code></span>(3)</span></a>
+            for the definition of <span class="type">union waffle_native_display</span>.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1" title="Return Value">
+<a name="idp25137568"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1" title="Errors">
+<a name="idp25138896"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<p>
+      No errors are specific to any of the <span class="type">waffle_display</span> functions.
+    </p>
+</div>
+<div class="refsect1" title="See Also">
+<a name="idp25141056"></a><h2>See Also</h2>
+<p>
+      <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
+    </p>
+</div>
+</div></body>
+</html>
