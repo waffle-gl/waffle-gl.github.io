@@ -4,6 +4,11 @@
  */
 
 body {
+  font-family: "Bitstream Vera Sans", "DejaVu Sans", Tahoma, sans-serif;
+  color: #222222;
+  background: white;
+  font-size: 14px;
+  line-height: 16px;
   padding: 0px 150px;
 }
 
