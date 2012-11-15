@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#
+# SYNOPSIS
+#     sync pull [-n]
+#     sync push [-n]
+#
+# DESCRIPTION
+#     Syncs the local test site, at $git_root/site, with the production site.
+#     
+
+set -e
+
+git_root=$(cd $(dirname $BASH_SOURCE); git root)
+local_site="$git_root/site/"
+real_site="people.freedesktop.org:~chadversary/public_html/waffle/"
+
+function usage_error() {
+    echo "usage error"
+    exit 1
+}
+
+case "$1" in
+    "pull")
+        src=$real_site
+        dest=$local_site
+        ;;
+    "push")
+        src=$local_site
+        dest=$real_site
+        ;;
+    *)
+        usage_error
+        ;;
+esac
+
+shift
+
+if [[ "$1" = "-n" ]]; then
+    dry="-n"
+    shift
+fi
+
+if [[ $# != 0 ]]; then
+    usage_error
+fi
+
+rsync $dry -vcr --exclude .git "$src" "$dest"
