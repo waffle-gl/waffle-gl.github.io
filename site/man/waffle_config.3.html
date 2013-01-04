@@ -278,7 +278,7 @@ struct waffle_config;
 <dd><p>
             The default value for each size attribute is <code class="constant">0</code>.
 
-            The range of valid values is the non-negative integers.
+            Valid values are the non-negative integers and <code class="constant">WAFFLE_DONT_CARE</code>.
 
             If the requested size
             for a channel is 0, then any surface created with the config will lack that channel. If the requested size
@@ -288,21 +288,39 @@ struct waffle_config;
 <dt>
 <span class="term"><code class="constant">WAFFLE_SAMPLE_BUFFERS</code><br></span><span class="term"><code class="constant">WAFFLE_SAMPLES</code></span>
 </dt>
-<dd><p>
-            The valid values for <code class="constant">WAFFLE_SAMPLE_BUFFERS</code> are true and false. The default value is
-            false. If false, then any surface created with the config will not be multisampled. If true, the any surface
+<dd>
+<p>
+            The default value of <code class="constant">WAFFLE_SAMPLE_BUFFERS</code> is false(0).
+
+            Valid values are true(1), false(0), and <code class="constant">WAFFLE_DONT_CARE</code>.
+
+            The attribute specifies if a surface created with this config is double-buffered.
+
+            If false, then any surface created with the config will not be multisampled. If true, the any surface
             created with the config will be multisampled, where the number of samples will be at least
-            <code class="constant">WAFFLE_SAMPLES</code>. The default value of <code class="constant">WAFFLE_SAMPLES</code> is 0.
-          </p></dd>
+            <code class="constant">WAFFLE_SAMPLES</code>.
+          </p>
+<p>
+            The default value of <code class="constant">WAFFLE_SAMPLES</code> is <code class="constant">0</code>.
+
+            Valid values are the non-negative integers and <code class="constant">WAFFLE_DONT_CARE</code>.
+          </p>
+</dd>
 <dt><span class="term"><code class="constant">WAFFLE_DOUBLE_BUFFERED</code></span></dt>
 <dd><p>
-            The valid values are true and false. The default is true. This attribute specifies if a surface created with
-            this config is double-buffered.
+            The default value is true(1).
+
+            Valid values are true(1), false(0), and <code class="constant">WAFFLE_DONT_CARE</code>.
+
+            This attribute specifies if a surface created with this config is double-buffered.
           </p></dd>
 <dt><span class="term"><code class="constant">WAFFLE_ACCUM_BUFFER</code></span></dt>
 <dd><p>
-            The valid values are true and false. The default is false. This attribute specifies if a surface created with
-            this config possesses an accumulation buffer.
+            The default value is false(0).
+
+            Valid values are true(1), false(0), and <code class="constant">WAFFLE_DONT_CARE</code>.
+
+            This attribute specifies if a surface created with this config possesses an accumulation buffer.
           </p></dd>
 </dl></div>
 </div>
