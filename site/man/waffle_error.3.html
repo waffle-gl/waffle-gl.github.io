@@ -3,15 +3,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_init</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_init">
-<a name="waffle_init"></a><div class="titlepage"></div>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
+<a name="waffle_error"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2>Name</h2>
 <p>waffle_error, waffle_error_get_info, waffle_error_get_code, waffle_error_to_string — Thread-local error state</p>
 </div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <h2>Synopsis</h2>
 <div class="funcsynopsis">
 <pre class="funcsynopsisinfo">
@@ -25,29 +25,29 @@ struct waffle_error_info {
     size_t message_length;
 };
       </pre>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">const struct waffle_error_info* <b class="fsfunc">waffle_error_get_info</b>(</code></td>
 <td>
 <code>void)</code>;</td>
 <td> </td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">int32_t <b class="fsfunc">waffle_error_get_code</b>(</code></td>
 <td>
 <code>void)</code>;</td>
 <td> </td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">const char* <b class="fsfunc">waffle_error_to_string</b>(</code></td>
 <td>int32_t <var class="pdparam">e</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
 </div>
 </div>
-<div class="refsect1" title="Description">
-<a name="idp111536"></a><h2>Description</h2>
+<div class="refsect1">
+<a name="idm209337443568"></a><h2>Description</h2>
 <p>
       Waffle functions usually return either a <span class="type">bool</span>, in which false indicates failure, or a pointer, in
       which null indicates failure. In addition to returning a flag indicating failure, most functions also clear and
@@ -58,7 +58,7 @@ struct waffle_error_info {
       All functions listed here can be called before waffle has been successfully initialized with
       <a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_init</code></span>(3)</span></a>
     </p>
-<div class="variablelist"><dl>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_error_info</span></span></dt>
 <dd>
 <p>
@@ -116,7 +116,7 @@ struct waffle_error_info {
             For reference, below is the complete list of waffle's error codes.
 
             </p>
-<div class="variablelist"><dl>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="constant">WAFFLE_NO_ERROR</code> = 0x00</span></dt>
 <dd><p>
                     The function succeeded.
@@ -193,8 +193,8 @@ struct waffle_error_info {
 </dd>
 </dl></div>
 </div>
-<div class="refsect1" title="See Also">
-<a name="idp5055456"></a><h2>See Also</h2>
+<div class="refsect1">
+<a name="idm209336370432"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>

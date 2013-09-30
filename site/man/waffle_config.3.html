@@ -3,15 +3,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_config</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_config">
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_config"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2>Name</h2>
 <p>waffle_config, waffle_config_choose, waffle_config_destroy, waffle_config_get_native — class <code class="classname">waffle_config</code></p>
 </div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <h2>Synopsis</h2>
 <div class="funcsynopsis">
 <pre class="funcsynopsisinfo">
@@ -19,7 +19,7 @@
 
 struct waffle_config;
       </pre>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;">
 <tr>
 <td><code class="funcdef">struct waffle_config* <b class="fsfunc">waffle_config_choose</b>(</code></td>
 <td>struct waffle_display *<var class="pdparam">display</var>, </td>
@@ -30,21 +30,21 @@ struct waffle_config;
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_config_destroy</b>(</code></td>
 <td>struct waffle_config *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">union waffle_native_config* <b class="fsfunc">waffle_config_get_native</b>(</code></td>
 <td>struct waffle_config *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
 </div>
 </div>
-<div class="refsect1" title="Description">
-<a name="idp50512"></a><h2>Description</h2>
-<div class="variablelist"><dl>
+<div class="refsect1">
+<a name="idm209345477472"></a><h2>Description</h2>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_config</span></span></dt>
 <dd><p>
             An opaque type.
@@ -86,8 +86,8 @@ struct waffle_config;
           </p></dd>
 </dl></div>
 </div>
-<div class="refsect1" title="Discussion">
-<a name="idp25376"></a><h2>Discussion</h2>
+<div class="refsect1">
+<a name="idm209345760368"></a><h2>Discussion</h2>
 <p>
       The context attributes (<code class="constant">WAFFLE_CONTEXT_*</code>) have quirks that are specific to the native
       platform. Waffle attempts to accomdate those quirks in a platform-neutral way as much as possible, but not all
@@ -127,9 +127,9 @@ struct waffle_config;
 <p>
     </p>
 </div>
-<div class="refsect1" title="Attributes">
+<div class="refsect1">
 <a name="sect.attributes"></a><h2>Attributes</h2>
-<div class="variablelist"><dl>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="constant">WAFFLE_CONTEXT_API</code></span></dt>
 <dd>
 <p>
@@ -272,6 +272,68 @@ struct waffle_config;
             <code class="constant">WAFFLE_CONTEXT_PROFILE_COMPATIBILITY</code>.
           </p>
 </dd>
+<dt><span class="term"><code class="constant">WAFFLE_CONTEXT_FORWARD_COMPATIBLE</code></span></dt>
+<dd>
+<p>
+            Feature test macro: <code class="code">WAFFLE_API_VERSION &gt;= 0x0103</code>.
+            (See <a class="citerefentry" href="waffle_feature_test_macros.7.html"><span class="citerefentry"><span class="refentrytitle">waffle_feature_test_macros</span>(7)</span></a>).
+          </p>
+<p>
+            This attribute, if true, instructs
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            to create a forward-compatible context.
+
+            However, even if <code class="function">waffle_config_choose()</code>
+            successfully returns a config for a forward-compatible context, the
+            native platform may later reject it when
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            is called.
+          </p>
+<p>
+            Forward-compatible contexts do not support functionality marked as
+            deprecated by that version of the API.  A non-forward-compatible
+            context supports all functionality in that version, deprecated or
+            not.
+          </p>
+<p>
+            This attribute is optional and its default value is false(0).
+
+            Valid values are true(1), false(0), and <code class="constant">WAFFLE_DONT_CARE</code>.
+
+            However, true(1) is valid only if
+            the requested context API is <code class="constant">WAFFLE_CONTEXT_OPENGL</code>
+            and its version is at least 3.0.
+          </p>
+</dd>
+<dt><span class="term"><code class="constant">WAFFLE_CONTEXT_DEBUG</code></span></dt>
+<dd>
+<p>
+            Feature test macro: <code class="code">WAFFLE_API_VERSION &gt;= 0x0103</code>.
+            (See <a class="citerefentry" href="waffle_feature_test_macros.7.html"><span class="citerefentry"><span class="refentrytitle">waffle_feature_test_macros</span>(7)</span></a>).
+          </p>
+<p>
+            This attribute, if true, instructs
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            to create a debug context.
+
+            However, even if <code class="function">waffle_config_choose()</code>
+            successfully returns a config for a debug context, the
+            native platform may later reject it when
+            <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">waffle_context_create</code></span>(3)</span></a>
+            is called.
+          </p>
+<p>
+            Debug contexts are intended for use during application development, to provide additional runtime checking,
+            validation, and logging functionality while possibly incurring performance penalties. The additional
+            functionality provided by debug contexts may vary according to the implementation. In some cases a debug
+            context may be identical to a non-debug context.
+          </p>
+<p>
+            This attribute is optional and its default value is false(0).
+
+            Valid values are true(1), false(0), and <code class="constant">WAFFLE_DONT_CARE</code>.
+          </p>
+</dd>
 <dt>
 <span class="term"><code class="constant">WAFFLE_RED_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_GREEN_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_BLUE_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_ALPHA_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_DEPTH_SIZE</code><br></span><span class="term"><code class="constant">WAFFLE_STENCIL_SIZE</code></span>
 </dt>
@@ -324,8 +386,8 @@ struct waffle_config;
           </p></dd>
 </dl></div>
 </div>
-<div class="refsect1" title="Return Value">
-<a name="idp4792464"></a><h2>Return Value</h2>
+<div class="refsect1">
+<a name="idm209346152208"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -333,8 +395,8 @@ struct waffle_config;
   information about any errors.
 </p>
 </div>
-<div class="refsect1" title="Errors">
-<a name="idp4793728"></a><h2>Errors</h2>
+<div class="refsect1">
+<a name="idm209345380032"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -342,9 +404,9 @@ struct waffle_config;
 <p>
       Listed below are the errors specific to the <span class="type">waffle_config</span> functions.
     </p>
-<div class="variablelist"><dl>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="function">waffle_config_choose()</code></span></dt>
-<dd><div class="variablelist"><dl>
+<dd><div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="errorcode">WAFFLE_ERROR_BAD_ATTRIBUTE</span></span></dt>
 <dd><p>
                   An item in <em class="parameter"><code>attrib_list</code></em> is unrecognized or has an invalid value, or a required
@@ -366,7 +428,7 @@ struct waffle_config;
                   For example,
 
                   </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
                         GLX supports creation of an OpenGL ES2 context only if libGLESv2.so is installed and if
                         GLX_EXT_create_context_es2_profile is exposed as both a server and client extension.
@@ -382,10 +444,10 @@ struct waffle_config;
 </dl></div></dd>
 </dl></div>
 </div>
-<div class="refsect1" title="Examples">
-<a name="idp4806608"></a><h2>Examples</h2>
-<div class="refsect2" title="Example 1">
-<a name="idp4807248"></a><h3>Example 1</h3>
+<div class="refsect1">
+<a name="idm209347078704"></a><h2>Examples</h2>
+<div class="refsect2">
+<a name="idm209346682064"></a><h3>Example 1</h3>
 <p>
         Choose a config for an OpenGL legacy context that has at least 8 bits in each of the RGBA channels.
 
@@ -441,8 +503,8 @@ main()
 <p>
       </p>
 </div>
-<div class="refsect2" title="Example 2">
-<a name="idp4809152"></a><h3>Example 2</h3>
+<div class="refsect2">
+<a name="idm209344930880"></a><h3>Example 2</h3>
 <p>
         An attribute list for creating an OpenGL 3.2 Core Profile context that has depth and stencil buffers and some
         non-zero number of bits in each of the RGB channels.  Since the default value of
@@ -473,8 +535,8 @@ const int32_t attrib_list[] = {
       </p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
-<a name="idm37360"></a><h2>See Also</h2>
+<div class="refsect1">
+<a name="idm209344271520"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
       <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_context_create</span>(3)</span></a>

@@ -3,15 +3,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_window</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_window">
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_window"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2>Name</h2>
 <p>waffle_window, waffle_window_create, waffle_window_destroy, waffle_window_show, waffle_window_swap_buffers, waffle_window_get_native — class <code class="classname">waffle_window</code></p>
 </div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <h2>Synopsis</h2>
 <div class="funcsynopsis">
 <pre class="funcsynopsisinfo">
@@ -19,7 +19,7 @@
 
 struct waffle_window;
       </pre>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;">
 <tr>
 <td><code class="funcdef">struct waffle_window* <b class="fsfunc">waffle_window_create</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">config</var>, </td>
@@ -34,31 +34,31 @@ struct waffle_window;
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_window_destroy</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_window_show</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_window_swap_buffers</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">union waffle_native_window* <b class="fsfunc">waffle_window_get_native</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
 </div>
 </div>
-<div class="refsect1" title="Description">
-<a name="idp57024"></a><h2>Description</h2>
-<div class="variablelist"><dl>
+<div class="refsect1">
+<a name="idm209365978128"></a><h2>Description</h2>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_window</span></span></dt>
 <dd><p>
             An opaque type.
@@ -101,8 +101,8 @@ struct waffle_window;
           </p></dd>
 </dl></div>
 </div>
-<div class="refsect1" title="Return Value">
-<a name="idp3980672"></a><h2>Return Value</h2>
+<div class="refsect1">
+<a name="idm209365950224"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -110,8 +110,8 @@ struct waffle_window;
   information about any errors.
 </p>
 </div>
-<div class="refsect1" title="Errors">
-<a name="idp3982000"></a><h2>Errors</h2>
+<div class="refsect1">
+<a name="idm209365948896"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -120,8 +120,8 @@ struct waffle_window;
       No errors are specific to the <span class="type">waffle_window</span> functions.
     </p>
 </div>
-<div class="refsect1" title="See Also">
-<a name="idp24176"></a><h2>See Also</h2>
+<div class="refsect1">
+<a name="idm209365946688"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>

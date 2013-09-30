@@ -3,15 +3,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_context</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="waffle_context">
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_context"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2>Name</h2>
 <p>waffle_context, waffle_context_create, waffle_context_destroy, waffle_context_get_native — class <code class="classname">waffle_context</code></p>
 </div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <h2>Synopsis</h2>
 <div class="funcsynopsis">
 <pre class="funcsynopsisinfo">
@@ -19,7 +19,7 @@
 
 struct waffle_context;
       </pre>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table">
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;">
 <tr>
 <td><code class="funcdef">struct waffle_context* <b class="fsfunc">waffle_context_create</b>(</code></td>
 <td>struct waffle_config *<var class="pdparam">config</var>, </td>
@@ -30,21 +30,21 @@ struct waffle_context;
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_context_destroy</b>(</code></td>
 <td>struct waffle_context *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
-<table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">union waffle_native_context* <b class="fsfunc">waffle_context_get_native</b>(</code></td>
 <td>struct waffle_context *<var class="pdparam">self</var><code>)</code>;</td>
 </tr></table>
 <div class="funcprototype-spacer"> </div>
 </div>
 </div>
-<div class="refsect1" title="Description">
-<a name="idp50352"></a><h2>Description</h2>
-<div class="variablelist"><dl>
+<div class="refsect1">
+<a name="idm209355518048"></a><h2>Description</h2>
+<div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_context</span></span></dt>
 <dd><p>
             An opaque type.
@@ -85,7 +85,7 @@ struct waffle_context;
           </p></dd>
 </dl></div>
 </div>
-<div class="refsect1" title="Version Promotion">
+<div class="refsect1">
 <a name="sect.version_promotion"></a><h2>Version Promotion</h2>
 <p>
       The context's requested version and profile is given by the config attributes
@@ -100,7 +100,7 @@ struct waffle_context;
       as described below.
 
       </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
 <p>
             If the chosen API is
@@ -174,8 +174,8 @@ struct waffle_context;
 <p>
     </p>
 </div>
-<div class="refsect1" title="Return Value">
-<a name="idp41392"></a><h2>Return Value</h2>
+<div class="refsect1">
+<a name="idm209355509888"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -183,8 +183,8 @@ struct waffle_context;
   information about any errors.
 </p>
 </div>
-<div class="refsect1" title="Errors">
-<a name="idp42720"></a><h2>Errors</h2>
+<div class="refsect1">
+<a name="idm209357070032"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -193,8 +193,8 @@ struct waffle_context;
       No errors are specific to the <span class="type">waffle_context</span> functions.
     </p>
 </div>
-<div class="refsect1" title="See Also">
-<a name="idp44928"></a><h2>See Also</h2>
+<div class="refsect1">
+<a name="idm209356699568"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
       <a class="citerefentry" href="waffle_config.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_config_choose</span>(3)</span></a>
