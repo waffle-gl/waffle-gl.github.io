@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>wflinfo</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
+<a name="wflinfo"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>wflinfo — a utility for printing OpenGL or OpenGL ES driver information</p>
+</div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<div class="cmdsynopsis"><p><code class="command">wflinfo</code>   
+        <code class="option">--platform=<em class="replaceable"><code>platform</code></em></code>
+         
+        <code class="option">--api=<em class="replaceable"><code>api</code></em></code>
+        [
+        <code class="option"><em class="replaceable"><code>OPTIONS</code></em></code>
+      ]</p></div>
+</div>
+<div class="refsect1">
+<a name="idm223929546032"></a><h2>Description</h2>
+<p>
+      wflinfo is utility which creates an OpenGL or OpenGL ES context using the waffle library and
+      prints information about the context.
+    </p>
+</div>
+<div class="refsect1">
+<a name="idm223927125824"></a><h2>Required Parameters</h2>
+<div class="variablelist"><dl class="variablelist">
+<dt>
+<span class="term"><code class="option">-p</code> <em class="replaceable"><code>platform</code></em><br></span><span class="term"><code class="option">--platform=<em class="replaceable"><code>platform</code></em></code></span>
+</dt>
+<dd><p>
+            Where <em class="replaceable"><code>platform</code></em> is
+            <span class="simplelist">android, cgl, gbm, glx, wayland, or x11_egl</span>
+          </p></dd>
+<dt>
+<span class="term"><code class="option">-a</code> <em class="replaceable"><code>api</code></em><br></span><span class="term"><code class="option">--api=<em class="replaceable"><code>api</code></em></code></span>
+</dt>
+<dd><p>
+            Where <em class="replaceable"><code>api</code></em> is
+            <span class="simplelist">gl, gles1, gles2, or gles3</span>
+
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1">
+<a name="idm223926170048"></a><h2>Options</h2>
+<div class="variablelist"><dl class="variablelist">
+<dt>
+<span class="term"><code class="option">-V</code> <em class="replaceable"><code>MAJOR.MINOR</code></em><br></span><span class="term"><code class="option">--version=<em class="replaceable"><code>MAJOR.MINOR</code></em></code></span>
+</dt>
+<dd><p>
+            For example --api=gl --version=3.2 would request OpenGL 3.2
+          </p></dd>
+<dt><span class="term"><code class="option">--profile=<em class="replaceable"><code>profile</code></em></code></span></dt>
+<dd><p>
+            Where <em class="replaceable"><code>profile</code></em> is core, compat or none
+          </p></dd>
+<dt>
+<span class="term"><code class="option">-v</code><br></span><span class="term"><code class="option">--verbose</code></span>
+</dt>
+<dd><p>
+            Print more information
+          </p></dd>
+<dt><span class="term"><code class="option">--forward-compatible</code></span></dt>
+<dd><p>
+            Request a forward compatible context be created
+          </p></dd>
+<dt><span class="term"><code class="option">--debug-context</code></span></dt>
+<dd><p>
+            Request a debug context be created
+          </p></dd>
+<dt>
+<span class="term"><code class="option">-h</code><br></span><span class="term"><code class="option">--help</code></span>
+</dt>
+<dd><p>
+            Print wflinfo usage information
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1">
+<a name="idm223926202272"></a><h2>Examples</h2>
+<p>
+      </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>wflinfo --platform=glx --api=gl</td></tr>
+<tr><td>wflinfo --platform=x11_egl --api=gl --version=3.2 --profile=core</td></tr>
+<tr><td>wflinfo --platform=wayland --api=gles3</td></tr>
+<tr><td>wflinfo --platform=gbm --api=gl --version=3.2 --verbose</td></tr>
+<tr><td>wflinfo -p gbm -a gl -V 3.2 -v</td></tr>
+</table>
+<p>
+    </p>
+</div>
+<div class="refsect1">
+<a name="idm223921867840"></a><h2>Issues</h2>
+<p>
+    Please report bugs or and feature requests to
+    <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
+  </p>
+</div>
+<div class="refsect1">
+<a name="idm223927606976"></a><h2>See Also</h2>
+<p>
+      </p>
+<table border="0" summary="Simple list" class="simplelist"><tr><td><a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a></td></tr></table>
+<p>
+    </p>
+</div>
+</div></body>
+</html>
