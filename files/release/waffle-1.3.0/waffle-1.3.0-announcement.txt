@@ -1,0 +1,66 @@
+From: Chad Versace <chad.versace@linux.intel.com>
+To: waffle@lists.freedesktop.org
+To: piglit@lists.freedesktop.org
+Subject: [ANNOUNCE] waffle-1.3.0
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Waffle 1.3.0 (30 Sept 2013)
+===========================
+
+Waffle 1.3.0 is now available. This release introduces the ability create
+forward-compatible and debug contexts as well as improved support for Mac OS.
+Details below.
+
+As usual, the release is available as a tarball
+
+    http://people.freedesktop.org/~chadversary/waffle/files/release/waffle-1.3.0/waffle-1.3.0.tar.xz
+    http://people.freedesktop.org/~chadversary/waffle/files/release/waffle-1.3.0/waffle-1.3.0.tar.xz.sig
+
+    SHA256SUMS
+    340ee04172dba878249469018cd7ec9d1ecd41af26b612c741b8b52e713bca8e  waffle-1.3.0.tar.xz
+    86f7f5d12c9f43ae3f04629371978b87a6c655f245a84bbbb37c97e1fff1e5a2  waffle-1.3.0.tar.xz.sig
+
+Or as tag 'waffle-1.3.0' in the git repository
+
+    git://people.freedesktop.org/~chadversary/waffle.git refs/tags/waffle-1.3.0
+
+If you're using Archlinux, it's in the AUR as 'waffle'.
+
+
+New Features
+- ------------
+- - [all platforms] Support for creating forward-compatible OpenGL contexts.
+  See the documentation for WAFFLE_CONTEXT_FORWARD_COMPATIBLE in manpage
+  waffle_config(3).
+
+- - [all platforms] Support for creating OpenGL and OpenGL ES debug contexts.
+  See the documentation for WAFFLE_CONTEXT_DEBUG in manpage waffle_config(3).
+
+- - [cgl] Improved support on Mac OS for choosing the OpenGL context version.
+  This will be needed for Piglit to transparently run OpenGL 3.1 tests on Mac
+  OS.
+
+  Previously, Waffle required the client to choose exactly either 3.2 or leave
+  the context version at its default value, 1.0. Now, Waffle emulates the
+  behavior of EGL: the client may request any context flavor, and Waffle will
+  promote the requested flavor to the latest supported flavor
+  backwards-compatible with the requested one).
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.14 (GNU/Linux)
+
+iQIcBAEBAgAGBQJSSjCSAAoJEAIvNt057x8iL9UQAKf9LgsjH3vhiT6TynMW4x1s
+xFQpShXdbkzVDanpHRurpIfMsoND7cJprmD5eJDmLwegU3X8c03a+OD3QHg5XlGq
+KYr/xP1dHsASxr7ekeW31F+SDSTn386cr04ScGSHPOQvVcW4XwHrp7jhJ4yLh/+s
+kjiXBWfNQ77MKU9BWjcKmdmy7qJrYHzSd7K/JOaHea22dmHDdWh7YzB2wKjM5/0o
+La+wQlIV/24JAOIIekAq5lcS1L9yA/qPrzG9CetfE9RXH52fufs9rstf8UN59h6y
+robMN/H7Ln+8Ba/oKj73aEg/uK7GW+hsHaBEI/AdMcUTDkaw5ps3+dhwlXcK8q03
+rxgsGjmMXLtYu5PN89xGK4yT4ms/h6/q3Wn5TBFx82msuI+ALk4GAgpks5O/EZ4H
+ERfLE87jU27UzcE8rV/85xhn8ao9YiM0hnB1NJNc0laeOr81dLZriAuPbOJ4Lncy
+SpkUp4aFukBXniLLfDcV3ek9DM5+cj5ftMg+dH1NAc9Jxk2H5OCt9F3NKlfV4k2W
+1iqFdEYuXsZbGbtIgxpzOPRoOJvT5fVMkXrk05etnWyapEnZ0pkADTe/WUwF3gfD
+dvfvuQM03mdlnff5clqVGi+gQvmxS9J9IDxWLCjI4JL3qR95myTUqNgNrcKuVyUU
+zaDGgk3qUfk2okMT2pM6
+=PDM9
+-----END PGP SIGNATURE-----
