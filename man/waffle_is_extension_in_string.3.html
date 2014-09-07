@@ -20,18 +20,18 @@
 <table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;">
 <tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_is_extension_in_string</b>(</code></td>
-<td>const char *restrict <var class="pdparam">extension_string</var>, </td>
+<td>const char * <var class="pdparam">extension_string</var>, </td>
 </tr>
 <tr>
 <td> </td>
-<td>const char *restrict <var class="pdparam">extension_name</var><code>)</code>;</td>
+<td>const char * <var class="pdparam">extension_name</var><code>)</code>;</td>
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
 </div>
 </div>
 <div class="refsect1">
-<a name="idm223929136416"></a><h2>Description</h2>
+<a name="idm254321142448"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="function">waffle_is_extension_in_string()</code></span></dt>
 <dd>
@@ -43,7 +43,7 @@
 
             in the format returned by <code class="code">glGetString(GL_EXTENSIONS)</code>.
 
-            Note that this function is not restricted to the GL extension string;
+            Note that this function is not restricted to the OpenGL extension string;
 
             it can also be used on the GLX and EGL extension strings.
           </p>
@@ -56,20 +56,20 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm223929129536"></a><h2>Errors</h2>
+<a name="idm254317355664"></a><h2>Errors</h2>
 <p>
       This function sets the error code to <code class="constant">WAFFLE_NO_ERROR</code>.
     </p>
 </div>
 <div class="refsect1">
-<a name="idm223927102016"></a><h2>Issues</h2>
+<a name="idm254315258608"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm223929127376"></a><h2>See Also</h2>
+<a name="idm254317353504"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>
