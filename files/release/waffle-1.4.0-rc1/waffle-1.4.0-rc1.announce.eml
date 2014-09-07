@@ -1,0 +1,126 @@
+Subject: [ANNOUNCE] Waffle 1.4.0-rc1
+From: Chad Versace <chad.versace@linux.intel.com>
+To: waffle@lists.freedesktop.org
+Cc: Dylan Baker <dylanx.c.baker@intel.com>
+Cc: Jordan Justen <jordan.l.justen@intel.com>
+Cc: Emil Velikov <emil.l.velikov@gmail.com>
+Cc: Daniel Kurtz <djkurtz@chromium.org>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Waffle 1.4.0-rc1 is now released and available for testing. This is
+a testing preview of the upcoming 1.4.0 feature release.
+
+It's been a loooooong time since the last release (Waffle 1.3.0 happened
+in 2013!) and a lot has happened since then. Waffle now has a wflinfo
+utility, supports Linux DRM render nodes through the GBM backend, is
+packaged by several distributions, and has a proper issue tracker on
+Github.  The most prominent change, in my opinion, as that Waffle has
+more active contributors than last year (namely Jordan and Emil).
+
+Since I've been out of practice of making releases, the release candidate will
+cautiously bake for a full week before the final release.  If all goes
+smoothly, I plan to publish the final 1.4.0 tarballs on Monday 15 September.
+
+The next major release (2.0) will likely happen near the end of
+September this month.  Emil has been working hard to add Windows support
+to Waffle and Piglit, and that needs to be packaged up and shipped soon.
+
+Tarballs and other release files are available at
+
+    Release Page:       http://www.waffle-gl.org/release.html#1.4.0-rc1
+    Source:             http://www.waffle-gl.org/files/release/waffle-1.4.0-rc1/waffle-1.4.0-rc1.tar.xz
+    GPG Signature:      http://www.waffle-gl.org/files/release/waffle-1.4.0-rc1/waffle-1.4.0-rc1.tar.asc
+
+    SHA256 83c62329751bf96159934d8eb062d9cc8230895e268ae6c5fb94ac00d3508af4  waffle-1.4.0-rc1.tar.xz
+
+The signed git tag v1.4.0-rc1 is available in
+
+    git://github.com/waffle-gl/waffle
+    http://github.com/waffle-gl/waffle
+
+You can verify the release files by:
+
+    Verifying the tarball's signature:
+      unxz waffle-1.4.0-rc1.tar.xz
+      gpg --verify waffle-1.4.0-rc1.tar.asc
+
+    Verifying the tag's signature:
+      git fetch --tags origin
+      git tag --verify v1.4.0-rc1
+
+    Verifying the tarball's checksum (least secure method):
+      echo '83c62329751bf96159934d8eb062d9cc8230895e268ae6c5fb94ac00d3508af4  waffle-1.4.0-rc1.tar.xz' | sha256sum -c
+    
+Please file bugs and issues at
+
+    https://github.com/waffle-gl/waffle/issues
+
+You can view the commit history for this release at
+
+    https://github.com/waffle-gl/waffle/commits/refs/tags/v1.4.0-rc1
+
+You can track the release status of the final 1.4.0 release in Waffle's
+snazzy new Github tracker:
+
+    https://github.com/waffle-gl/waffle/milestones
+
+
+Waffle 1.4.0 Release Notes (draft)
+==================================
+
+Backwards compatibility notes
+- -----------------------------
+Waffle 1.4.0 is backwards-compatible with Waffle 1.3.0, in ABI and API.
+
+
+New Features
+- ------------
+* All platforms
+
+    * wflinfo
+
+      The new 'wflinfo' utility reports information about the system's OpenGL
+      capabilities, similar to 'glxinfo'.  See the documentation at
+      [man:wflinfo.1] or [http://www.waffle-gl.org/man/wflinfo.1.html].
+
+      (Implemented by Jordan Justen. Chad Versace fixed some bugs and corner
+      cases).
+
+* Linux
+
+    * GBM backend gains support for DRM render nodes.
+
+      Waffle's GBM backend will now use render nodes (/dev/dri/render*) if
+      available. Otherwise, it falls back to 1.3.0 behavior and will use a DRI
+      card device (/dev/dri/card*). Render nodes require a recent kernel; you
+      may need to add drm.rnodes=1 to the kernel cmdline.
+
+      (Implemented by Jordan Justen).
+
+    * Debian packaging support.
+
+      Waffle now contains a toplevel 'debian' directory that supports creation
+      of Debian packages.  Waffle packages are already available in Debian
+      Unstable ("sid") as 'libwaffle-1.0', 'libwaffle-dev', 'libwaffle-doc',
+      and 'waffle-utils'.
+
+      (Debian packages are maintained by Jordan Justen).
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCAAGBQJUDN2rAAoJEAIvNt057x8ihv0P/01+v0dMGzp1nBeLHode9Mc7
++THUOS7HGA1W0N6FpPGxkiOj4q+19A8QRSp/jyIot6YV4xev3Sby9NTt/vSQO21w
+MM8KNtXpFogim9M7EBn+iaCK6rn1vNLWWIOpdtgfRRJUky6NHNshYRSsfQUzT4hg
+sjfjZT8y3mRoswUAIUaXLcnm9Weng+o48zmMI/IC0NB0eFhmziswYv+eSuVbC5z6
+xFJoiOsgLAOhfr1fxAk5xuDOpSKavnl/MVGYgnlUUcFQ7mzFaCtTnW/BINgvt9CC
+bUsy05wp5MFxNfWaNGeE8i6t69J1mc1WuIyaPk0jAzLGh6oMmX/E0hbyx/Xl5Qjr
+Mj4ApqbmWmpM8HPiJ2I6pE2x5iyVf2Tsj12kD6IDQyQ+bYAwj2lYxdzgPHQPhVXq
+rhrCTee0faV+KtYNpAH3Eadn1LLDRZnMgTCgKlRx6YYP9a6P4Wiym8vlwC3RShT4
+/pEfLn4QDJ6fRNv7Pj/gjhFfEL5y4lboWFnHXegmZneWrSrTcPLEDwRTPX03UJ2u
+TUVpKHiy5oeqDWytE89uTjltwedem57h/3DsQ93NZAcF8Wi+kRi8BqsIQf2UIipm
+eVEmrmGzMTc0hhEY65YR016t7iMltuAVu9oeJLQcIxys0qZQv/yJX2Kytqttc013
+BLU+8Ype9jC58XKtWBNN
+=WQHb
+-----END PGP SIGNATURE-----
