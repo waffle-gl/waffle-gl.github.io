@@ -23,7 +23,7 @@
 </div>
 </div>
 <div class="refsect1">
-<a name="idm254352049584"></a><h2>Description</h2>
+<a name="idm247281290912"></a><h2>Description</h2>
 <p>
       <code class="function">waffle_init()</code> initializes the per-process global state of the waffle library with the
       attributes specified in <em class="parameter"><code>attrib_list</code></em>.  The set of attributes is documented below.
@@ -41,7 +41,7 @@
     </p>
 </div>
 <div class="refsect1">
-<a name="idm254348262896"></a><h2>Attributes</h2>
+<a name="idm247281282960"></a><h2>Attributes</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="constant">WAFFLE_PLATFORM</code></span></dt>
 <dd>
@@ -76,6 +76,10 @@
 <dd><p>
                     [Linux] Use EGL with the Wayland display server.
                   </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_WGL</code></span></dt>
+<dd><p>
+                    [Windows] Use WGL on Windows.
+                  </p></dd>
 <dt><span class="term"><code class="constant">WAFFLE_PLATFORM_X11_EGL</code></span></dt>
 <dd><p>
                     [Linux] Use EGL with the X11 display server.
@@ -87,7 +91,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm254352144032"></a><h2>Return Value</h2>
+<a name="idm247285212816"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -96,7 +100,7 @@
 </p>
 </div>
 <div class="refsect1">
-<a name="idm254352142704"></a><h2>Errors</h2>
+<a name="idm247285211488"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -121,7 +125,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm254352132272"></a><h2>Example</h2>
+<a name="idm247285193760"></a><h2>Example</h2>
 <p>
       Initialize waffle for X11/EGL.
     </p>
@@ -147,14 +151,14 @@ main()
     </pre>
 </div>
 <div class="refsect1">
-<a name="idm254345708928"></a><h2>Issues</h2>
+<a name="idm247279341856"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm254352122080"></a><h2>See Also</h2>
+<a name="idm247285190816"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>

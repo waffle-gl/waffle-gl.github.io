@@ -25,7 +25,7 @@
 </div>
 </div>
 <div class="refsect1">
-<a name="idm254337996384"></a><h2>Description</h2>
+<a name="idm247268163664"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="function">waffle_get_proc_address()</code></span></dt>
 <dd>
@@ -39,9 +39,12 @@
             On CGL, this function returns <code class="constant">NULL</code>
 
             because there exists no <code class="function">CGLGetProcAdress()</code>.
+
+            On WGL, this redirects to
+            <a class="citerefentry" href="http://linuxmanpages.net/manpages/fedora17/man3/wglGetProcAddress.3.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">wglGetProcAddress</code></span>(3)</span></a>.
           </p>
 <p>
-            Some aspects of this function's behavior is platform-specific and non-intuitive.
+            Some aspects of this function's behavior are platform-specific and non-intuitive.
 
             For example,
 
@@ -57,6 +60,11 @@
 
                   then <code class="function">waffle_get_proc_address()</code> may return a <code class="constant">NULL</code>.
                 </p></li>
+<li class="listitem"><p>
+                  Under Windows (WGL) a current context must be available before executing the function.
+
+                  Otherwise <code class="function">waffle_get_proc_address()</code> may return a <code class="constant">NULL</code>.
+                </p></li>
 </ul></div>
 <p>
           </p>
@@ -67,13 +75,15 @@
 
             the <a class="ulink" href="http://www.opengl.org/registry/doc/glx1.4.pdf" target="_top">GLX 1.4 Specification</a>
 
-            or the <a class="ulink" href="http://www.khronos.org/registry/egl/specs/eglspec.1.4.20110406.pdf" target="_top">EGL 1.4 Specification</a>.
+            the <a class="ulink" href="http://www.khronos.org/registry/egl/specs/eglspec.1.4.20110406.pdf" target="_top">EGL 1.4 Specification</a>
+
+            or the <a class="ulink" href="http://msdn.microsoft.com/en-gb/library/windows/desktop/dd374386(v=vs.85).aspx" target="_top">MSDN article</a>.
           </p>
 </dd>
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm254341876928"></a><h2>Errors</h2>
+<a name="idm247272094352"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -83,14 +93,14 @@
     </p>
 </div>
 <div class="refsect1">
-<a name="idm254336314928"></a><h2>Issues</h2>
+<a name="idm247266968448"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm254341874688"></a><h2>See Also</h2>
+<a name="idm247272092112"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>,
       <a class="citerefentry" href="waffle_dl.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_dl_sym</span>(3)</span></a>
