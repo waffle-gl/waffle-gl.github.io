@@ -43,7 +43,7 @@ struct waffle_config;
 </div>
 </div>
 <div class="refsect1">
-<a name="idm247284471632"></a><h2>Description</h2>
+<a name="idm140463356898912"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_config</span></span></dt>
 <dd><p>
@@ -87,7 +87,7 @@ struct waffle_config;
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm247284621536"></a><h2>Discussion</h2>
+<a name="idm140463356868016"></a><h2>Discussion</h2>
 <p>
       The context attributes (<code class="constant">WAFFLE_CONTEXT_*</code>) have quirks that are specific to the native
       platform. Waffle attempts to accomdate those quirks in a platform-neutral way as much as possible, but not all
@@ -268,8 +268,8 @@ struct waffle_config;
 
             The set of accepted values is
 
-            <code class="constant">WAFFLE_CONTEXT_PROFILE_CORE</code> and
-            <code class="constant">WAFFLE_CONTEXT_PROFILE_COMPATIBILITY</code>.
+            <code class="constant">WAFFLE_CONTEXT_CORE_PROFILE</code> and
+            <code class="constant">WAFFLE_CONTEXT_COMPATIBILITY_PROFILE</code>.
           </p>
 </dd>
 <dt><span class="term"><code class="constant">WAFFLE_CONTEXT_FORWARD_COMPATIBLE</code></span></dt>
@@ -387,7 +387,7 @@ struct waffle_config;
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm247279558912"></a><h2>Return Value</h2>
+<a name="idm140463356787520"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -396,7 +396,7 @@ struct waffle_config;
 </p>
 </div>
 <div class="refsect1">
-<a name="idm247279557648"></a><h2>Errors</h2>
+<a name="idm140463356786256"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -430,7 +430,7 @@ struct waffle_config;
                   </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
-                        GLX supports creation of an OpenGL ES2 context only if libGLESv2.so is installed and if
+                        GLX supports creation of an OpenGL ES2 context only if libGLESv2.so.2 is installed and if
                         GLX_EXT_create_context_es2_profile is exposed as both a server and client extension.
                       </p></li>
 <li class="listitem"><p>
@@ -445,9 +445,9 @@ struct waffle_config;
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm247279544768"></a><h2>Examples</h2>
+<a name="idm140463356773376"></a><h2>Examples</h2>
 <div class="refsect2">
-<a name="idm247279544128"></a><h3>Example 1</h3>
+<a name="idm140463356772736"></a><h3>Example 1</h3>
 <p>
         Choose a config for an OpenGL legacy context that has at least 8 bits in each of the RGBA channels.
 
@@ -504,7 +504,7 @@ main()
       </p>
 </div>
 <div class="refsect2">
-<a name="idm247279542224"></a><h3>Example 2</h3>
+<a name="idm140463356770832"></a><h3>Example 2</h3>
 <p>
         An attribute list for creating an OpenGL 3.2 Core Profile context that has depth and stencil buffers and some
         non-zero number of bits in each of the RGB channels.  Since the default value of
@@ -536,14 +536,14 @@ const int32_t attrib_list[] = {
 </div>
 </div>
 <div class="refsect1">
-<a name="idm247275034624"></a><h2>Issues</h2>
+<a name="idm140463352785168"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm247279536048"></a><h2>See Also</h2>
+<a name="idm140463356764656"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
       <a class="citerefentry" href="waffle_context.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_context_create</span>(3)</span></a>

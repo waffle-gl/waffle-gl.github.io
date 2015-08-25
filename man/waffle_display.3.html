@@ -48,7 +48,7 @@ struct waffle_display;
 </div>
 </div>
 <div class="refsect1">
-<a name="idm247275450624"></a><h2>Description</h2>
+<a name="idm140103258977552"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_display</span></span></dt>
 <dd><p>
@@ -73,10 +73,15 @@ struct waffle_display;
             uses the value of the environment variable <code class="envar">WAYLAND_DISPLAY</code>.
           </p>
 <p>
-            On GBM, the function opens the device at the filepath <em class="parameter"><code>name</code></em>. If
-            <em class="parameter"><code>name</code></em> is null, then it iterates using udev through the set of card devices in the drm
-            subsystem, which are usually located in <code class="filename">/dev/dri</code>, and attempts to open each in turn
-            with <code class="code">open(O_RDWR | O_CLOEXEC)</code> until successful.
+            On GBM, the function opens the device at the filepath <em class="parameter"><code>name</code></em>.
+
+            If <em class="parameter"><code>name</code></em> is NULL, then the function uses the value of environment variable
+            <code class="envar">WAFFLE_GBM_DEVICE</code>.
+
+            If <em class="parameter"><code>name</code></em> is null and <code class="envar">WAFFLE_GBM_DEVICE</code> is unset, then the function
+            iterates using udev through the set of card devices in the drm subsystem, which are usually located in
+            <code class="filename">/dev/dri</code>, and attempts to open each in turn with <code class="code">open(O_RDWR | O_CLOEXEC)</code>
+            until successful.
           </p>
 </dd>
 <dt><span class="term"><code class="function">waffle_display_disconnect()</code></span></dt>
@@ -103,7 +108,7 @@ struct waffle_display;
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm247275180512"></a><h2>Return Value</h2>
+<a name="idm140103258949488"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -112,7 +117,7 @@ struct waffle_display;
 </p>
 </div>
 <div class="refsect1">
-<a name="idm247274364864"></a><h2>Errors</h2>
+<a name="idm140103258948224"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -122,14 +127,14 @@ struct waffle_display;
     </p>
 </div>
 <div class="refsect1">
-<a name="idm247272875760"></a><h2>Issues</h2>
+<a name="idm140103256427024"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://github.com/waffle-gl/waffle/issues" target="_top">https://github.com/waffle-gl/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm247277062032"></a><h2>See Also</h2>
+<a name="idm140103258945696"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>
