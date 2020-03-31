@@ -3,13 +3,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_make_current</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_make_current"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2>Name</h2>
-<p>waffle_make_current — Bind a context for rendering</p>
+<p>waffle_make_current, waffle_get_current_display, waffle_get_current_window, waffle_get_current_context — set and get resources current to the thread</p>
 </div>
 <div class="refsynopsisdiv">
 <h2>Synopsis</h2>
@@ -32,10 +32,31 @@
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
+<td><code class="funcdef">struct waffle_display *<b class="fsfunc">waffle_get_current_display</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
+<td><code class="funcdef">struct waffle_window *<b class="fsfunc">waffle_get_current_window</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
+<td><code class="funcdef">struct waffle_context *<b class="fsfunc">waffle_get_current_context</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
 </div>
 </div>
 <div class="refsect1">
-<a name="idm140289063082512"></a><h2>Description</h2>
+<a name="idm49"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="function">waffle_make_current()</code></span></dt>
 <dd>
@@ -60,10 +81,49 @@
             <code class="function">[NSOpenGLContext makeCurrentContext]</code>.
           </p>
 </dd>
+<dt><span class="term"><code class="function">waffle_get_current_display()</code></span></dt>
+<dd>
+<p>
+            Get the display bound to the current thread,
+            as previously bound by <code class="function">waffle_make_current()</code>.
+            If no display is bound, then return NULL.
+          </p>
+<p>
+            This function is analogous to
+            <a class="citerefentry" href="http://www.opengl.org/sdk/docs/man2/xhtml/glXGetCurrentDisplay.xml"><span class="citerefentry"><span class="refentrytitle"><code class="function">glXGetCurrentDisplay</code></span>(3)</span></a> and
+            <a class="citerefentry" href="http://www.khronos.org/registry/egl/sdk/docs/man/xhtml/eglGetCurrentDisplay.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">eglGetCurrentDisplay</code></span>(3)</span></a>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_get_current_window()</code></span></dt>
+<dd>
+<p>
+            Get the window bound to the current thread,
+            as previously bound by <code class="function">waffle_make_current()</code>.
+            If no window is bound, then return NULL.
+          </p>
+<p>
+            This function is analogous to
+            <a class="citerefentry" href="http://www.opengl.org/sdk/docs/man2/xhtml/glXGetCurrentDrawable.xml"><span class="citerefentry"><span class="refentrytitle"><code class="function">glXGetCurrentDrawable</code></span>(3)</span></a> and
+            <a class="citerefentry" href="http://www.khronos.org/registry/egl/sdk/docs/man/xhtml/eglGetCurrentSurface.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">eglGetCurrentSurface</code></span>(3)</span></a>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_get_current_context()</code></span></dt>
+<dd>
+<p>
+            Get the context bound to the current thread,
+            as previously bound by <code class="function">waffle_make_current()</code>.
+            If no context is bound, then return NULL.
+          </p>
+<p>
+            This function is analogous to
+            <a class="citerefentry" href="http://www.opengl.org/sdk/docs/man2/xhtml/glXGetCurrentContext.xml"><span class="citerefentry"><span class="refentrytitle"><code class="function">glXGetCurrentContext</code></span>(3)</span></a> and
+            <a class="citerefentry" href="http://www.khronos.org/registry/egl/sdk/docs/man/xhtml/eglGetCurrentContext.html"><span class="citerefentry"><span class="refentrytitle"><code class="function">eglGetCurrentContext</code></span>(3)</span></a>.
+          </p>
+</dd>
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm140289058122784"></a><h2>Return Value</h2>
+<a name="idm120"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -72,7 +132,7 @@
 </p>
 </div>
 <div class="refsect1">
-<a name="idm140289058121520"></a><h2>Errors</h2>
+<a name="idm128"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -82,14 +142,24 @@
     </p>
 </div>
 <div class="refsect1">
-<a name="idm140289057285584"></a><h2>Issues</h2>
+<a name="idm135"></a><h2>Bugs</h2>
+<p>
+      Mixing calls to <code class="function">waffle_make_current()</code>
+      and the native platform's <code class="function">MakeCurrent()</code>
+      on the same thread do not interact well.
+      After calling the native platform's <code class="function">MakeCurrent()</code>,
+      future Waffle function calls on the same thread are likely to behave incorrectly.
+    </p>
+</div>
+<div class="refsect1">
+<a name="idm141"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://gitlab.freedesktop.org/mesa/waffle/issues" target="_top">https://gitlab.freedesktop.org/mesa/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm140289058119376"></a><h2>See Also</h2>
+<a name="idm145"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>

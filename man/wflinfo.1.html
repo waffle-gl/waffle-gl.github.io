@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>wflinfo</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="wflinfo"></a><div class="titlepage"></div>
@@ -22,21 +22,21 @@
       ]</p></div>
 </div>
 <div class="refsect1">
-<a name="idm139657349085312"></a><h2>Description</h2>
+<a name="idm39"></a><h2>Description</h2>
 <p>
       wflinfo is utility which creates an OpenGL or OpenGL ES context using the waffle library and
       prints information about the context.
     </p>
 </div>
 <div class="refsect1">
-<a name="idm139657349084000"></a><h2>Required Parameters</h2>
+<a name="idm42"></a><h2>Required Parameters</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt>
 <span class="term"><code class="option">-p</code> <em class="replaceable"><code>platform</code></em><br></span><span class="term"><code class="option">--platform=<em class="replaceable"><code>platform</code></em></code></span>
 </dt>
 <dd><p>
             Where <em class="replaceable"><code>platform</code></em> is
-            <span class="simplelist">android, cgl, gbm, glx, wayland, wgl, or x11_egl</span>
+            <span class="simplelist">android, cgl, gbm, glx, surfaceless_egl (or short alias 'sl'), wayland, wgl, or x11_egl</span>
           </p></dd>
 <dt>
 <span class="term"><code class="option">-a</code> <em class="replaceable"><code>api</code></em><br></span><span class="term"><code class="option">--api=<em class="replaceable"><code>api</code></em></code></span>
@@ -49,7 +49,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm139657349068912"></a><h2>Options</h2>
+<a name="idm79"></a><h2>Options</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt>
 <span class="term"><code class="option">-V</code> <em class="replaceable"><code>MAJOR.MINOR</code></em><br></span><span class="term"><code class="option">--version=<em class="replaceable"><code>MAJOR.MINOR</code></em></code></span>
@@ -76,6 +76,18 @@
             Request a debug context be created
           </p></dd>
 <dt>
+<span class="term"><code class="option">-f <em class="replaceable"><code>format</code></em></code><br></span><span class="term"><code class="option">--format=<em class="replaceable"><code>format</code></em></code></span>
+</dt>
+<dd>
+<p>
+            Choose the output format. Supported formats are 'original' (the default) and 'json'.
+          </p>
+<p>
+            The JSON format is backwards-compatible across Waffle versions.
+            Future Waffle versions may add new entries to the JSON output, but will not remove existing entries.
+          </p>
+</dd>
+<dt>
 <span class="term"><code class="option">-h</code><br></span><span class="term"><code class="option">--help</code></span>
 </dt>
 <dd><p>
@@ -84,7 +96,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm139657349054112"></a><h2>Examples</h2>
+<a name="idm132"></a><h2>Examples</h2>
 <p>
       </p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -98,14 +110,14 @@
     </p>
 </div>
 <div class="refsect1">
-<a name="idm139657347050528"></a><h2>Issues</h2>
+<a name="idm141"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://gitlab.freedesktop.org/mesa/waffle/issues" target="_top">https://gitlab.freedesktop.org/mesa/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm139657349049920"></a><h2>See Also</h2>
+<a name="idm145"></a><h2>See Also</h2>
 <p>
       </p>
 <table border="0" summary="Simple list" class="simplelist"><tr><td><a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a></td></tr></table>

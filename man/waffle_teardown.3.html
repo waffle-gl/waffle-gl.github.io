@@ -1,0 +1,92 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>waffle_teardown</title>
+<link rel="stylesheet" type="text/css" href="manpage.css">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
+<a name="waffle_teardown"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2>Name</h2>
+<p>waffle_teardown — Teardown waffle's per-process global state</p>
+</div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<div class="funcsynopsis">
+<pre class="funcsynopsisinfo">#include &lt;waffle.h&gt;</pre>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
+<td><code class="funcdef">bool <b class="fsfunc">waffle_teardown</b>(</code></td>
+<td>
+<code>void)</code>;</td>
+<td> </td>
+</tr></table>
+<div class="funcprototype-spacer"> </div>
+</div>
+</div>
+<div class="refsect1">
+<a name="idm29"></a><h2>Description</h2>
+<p>
+      Feature test macro: <code class="code">WAFFLE_API_VERSION &gt;= 0x0106</code>.
+      (See <a class="citerefentry" href="waffle_feature_test_macros.7.html"><span class="citerefentry"><span class="refentrytitle">waffle_feature_test_macros</span>(7)</span></a>).
+    </p>
+<p>
+      <code class="function">waffle_teardown()</code> tears down the per-process global state of the waffle library.
+    </p>
+<p>
+      А call to <code class="function">waffle_teardown()</code> can fail. In the case it does the caller is advised
+      to use <code class="function">waffle_error_get_info</code>, <code class="function">waffle_error_get_code</code>
+      and/or <code class="function">waffle_error_to_string</code> to retrieve the error.
+
+      In case of an error that differs from <span class="errorcode">WAFFLE_ERROR_NOT_INITIALIZED</span> the caller
+      should not use the Waffle API as the global state is likely to be in an undetermined/corrupt.
+
+      In the case of <span class="errorcode">WAFFLE_ERROR_NOT_INITIALIZED</span> one should call
+      <code class="function">waffle_init()</code> prior to reusing Waffle.
+    </p>
+</div>
+<div class="refsect1">
+<a name="idm46"></a><h2>Return Value</h2>
+<p>
+  Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
+  type is a pointer return <code class="constant">NULL</code> on failure. Use
+  <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error_get_info</span>(3)</span></a> to get
+  information about any errors.
+</p>
+</div>
+<div class="refsect1">
+<a name="idm54"></a><h2>Errors</h2>
+<p>
+  See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
+  list of waffle's error codes.
+</p>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="errorcode">WAFFLE_ERROR_NOT_INITIALIZED</span></span></dt>
+<dd><p>
+            Waffle has not been initialized with a successfull call to <code class="function">waffle_init()</code>
+            since the last call to <code class="function">waffle_teardown()</code> or the start of the program.
+          </p></dd>
+</dl></div>
+</div>
+<div class="refsect1">
+<a name="idm68"></a><h2>Issues</h2>
+<p>
+    Please report bugs or and feature requests to
+    <a class="ulink" href="https://gitlab.freedesktop.org/mesa/waffle/issues" target="_top">https://gitlab.freedesktop.org/mesa/waffle/issues</a>.
+  </p>
+</div>
+<div class="refsect1">
+<a name="idm72"></a><h2>See Also</h2>
+<p>
+      </p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<a class="citerefentry" href="waffle_init.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_init</span>(3)</span></a>,</td></tr>
+<tr><td>
+<a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>.</td></tr>
+</table>
+<p>
+    </p>
+</div>
+</div></body>
+</html>
