@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_window</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_window"></a><div class="titlepage"></div>
@@ -34,6 +34,17 @@ struct waffle_window;
 </tr>
 </table>
 <div class="funcprototype-spacer"> </div>
+<table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;">
+<tr>
+<td><code class="funcdef">struct waffle_window* <b class="fsfunc">waffle_window_create2</b>(</code></td>
+<td>struct waffle_window *<var class="pdparam">config</var>, </td>
+</tr>
+<tr>
+<td> </td>
+<td>const intptr_t <var class="pdparam">attrib_list</var>[]<code>)</code>;</td>
+</tr>
+</table>
+<div class="funcprototype-spacer"> </div>
 <table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr>
 <td><code class="funcdef">bool <b class="fsfunc">waffle_window_destroy</b>(</code></td>
 <td>struct waffle_window *<var class="pdparam">self</var><code>)</code>;</td>
@@ -57,7 +68,7 @@ struct waffle_window;
 </div>
 </div>
 <div class="refsect1">
-<a name="idm139674906196400"></a><h2>Description</h2>
+<a name="idm67"></a><h2>Description</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><span class="type">struct waffle_window</span></span></dt>
 <dd><p>
@@ -71,6 +82,26 @@ struct waffle_window;
 <p>
             If the platform allows, the window is not displayed onto the screen after creation. To display the window,
             call <code class="function">waffle_window_show()</code>.
+          </p>
+</dd>
+<dt><span class="term"><code class="function">waffle_window_create2()</code></span></dt>
+<dd>
+<p>
+            Feature test macro: <code class="code">WAFFLE_API_VERSION &gt;= 0x0106</code>.
+            (See <a class="citerefentry" href="waffle_feature_test_macros.7.html"><span class="citerefentry"><span class="refentrytitle">waffle_feature_test_macros</span>(7)</span></a>).
+          </p>
+<p>
+            Create a window with the properties specified by
+            <em class="parameter"><code>config</code></em> and
+            <em class="parameter"><code>attrib_list</code></em>.
+
+            <em class="parameter"><code>attrib_list</code></em> must specify the window size
+            either with the attributes
+            <code class="constant">WAFFLE_WINDOW_WIDTH</code> and
+            <code class="constant">WAFFLE_WINDOW_HEIGHT</code> having positive values
+            &lt;= <code class="constant">INT32_MAX</code>,
+            or with the attribute
+            <code class="constant">WAFFLE_WINDOW_FULLSCREEN</code> equal to true(1).
           </p>
 </dd>
 <dt><span class="term"><code class="function">waffle_window_destroy()</code></span></dt>
@@ -102,7 +133,7 @@ struct waffle_window;
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm139674906176752"></a><h2>Return Value</h2>
+<a name="idm133"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -111,7 +142,7 @@ struct waffle_window;
 </p>
 </div>
 <div class="refsect1">
-<a name="idm139674906175488"></a><h2>Errors</h2>
+<a name="idm141"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -121,14 +152,14 @@ struct waffle_window;
     </p>
 </div>
 <div class="refsect1">
-<a name="idm139674905610304"></a><h2>Issues</h2>
+<a name="idm149"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://gitlab.freedesktop.org/mesa/waffle/issues" target="_top">https://gitlab.freedesktop.org/mesa/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm139674906172960"></a><h2>See Also</h2>
+<a name="idm153"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>

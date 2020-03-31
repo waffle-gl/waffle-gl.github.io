@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>waffle_init</title>
 <link rel="stylesheet" type="text/css" href="manpage.css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry">
 <a name="waffle_init"></a><div class="titlepage"></div>
@@ -23,7 +23,7 @@
 </div>
 </div>
 <div class="refsect1">
-<a name="idm140179946742864"></a><h2>Description</h2>
+<a name="idm30"></a><h2>Description</h2>
 <p>
       <code class="function">waffle_init()</code> initializes the per-process global state of the waffle library with the
       attributes specified in <em class="parameter"><code>attrib_list</code></em>.  The set of attributes is documented below.
@@ -36,12 +36,13 @@
 <p>
       If a call to <code class="function">waffle_init()</code> fails, no global state is initialized and the caller may safely
       attempt to call <code class="function">waffle_init()</code> again.  If waffle has already been initialized by a successful
-      call to <code class="function">waffle_init()</code>, then calling <code class="function">waffle_init()</code> again emits the error
+      call to <code class="function">waffle_init()</code> one has to call <code class="function">waffle_teardown()</code> to clear the
+      global state. Otherwise calling <code class="function">waffle_init()</code> again emits the error
       <span class="errorcode">WAFFLE_ERROR_ALREADY_INITIALIZED</span>.
     </p>
 </div>
 <div class="refsect1">
-<a name="idm140179941784192"></a><h2>Attributes</h2>
+<a name="idm44"></a><h2>Attributes</h2>
 <div class="variablelist"><dl class="variablelist">
 <dt><span class="term"><code class="constant">WAFFLE_PLATFORM</code></span></dt>
 <dd>
@@ -72,6 +73,15 @@
 <dd><p>
                     [Linux only, MacOS not yet supported]
                   </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_NACL</code></span></dt>
+<dd><p>
+                    [Linux only, other systems not yet supported]
+                  </p></dd>
+<dt><span class="term"><code class="constant">WAFFLE_PLATFORM_SURFACELESS_EGL</code></span></dt>
+<dd><p>
+                    [Linux] Use EGL's "surfaceless" platform,
+                    <a class="ulink" href="https://www.khronos.org/registry/egl/extensions/MESA/EGL_MESA_platform_surfaceless.txt" target="_top">EGL_MESA_platform_surfaceless</a>.
+                  </p></dd>
 <dt><span class="term"><code class="constant">WAFFLE_PLATFORM_WAYLAND</code></span></dt>
 <dd><p>
                     [Linux] Use EGL with the Wayland display server.
@@ -91,7 +101,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm140179941765056"></a><h2>Return Value</h2>
+<a name="idm111"></a><h2>Return Value</h2>
 <p>
   Functions whose return type is <span class="type">bool</span> return true on success and false on failure. Functions whose return
   type is a pointer return <code class="constant">NULL</code> on failure. Use
@@ -100,7 +110,7 @@
 </p>
 </div>
 <div class="refsect1">
-<a name="idm140179941763792"></a><h2>Errors</h2>
+<a name="idm119"></a><h2>Errors</h2>
 <p>
   See <a class="citerefentry" href="waffle_error.3.html"><span class="citerefentry"><span class="refentrytitle">waffle_error</span>(3)</span></a> for the complete
   list of waffle's error codes.
@@ -125,7 +135,7 @@
 </dl></div>
 </div>
 <div class="refsect1">
-<a name="idm140179941753872"></a><h2>Example</h2>
+<a name="idm145"></a><h2>Example</h2>
 <p>
       Initialize waffle for X11/EGL.
     </p>
@@ -151,14 +161,14 @@ main()
     </pre>
 </div>
 <div class="refsect1">
-<a name="idm140179938409136"></a><h2>Issues</h2>
+<a name="idm149"></a><h2>Issues</h2>
 <p>
     Please report bugs or and feature requests to
     <a class="ulink" href="https://gitlab.freedesktop.org/mesa/waffle/issues" target="_top">https://gitlab.freedesktop.org/mesa/waffle/issues</a>.
   </p>
 </div>
 <div class="refsect1">
-<a name="idm140179941751024"></a><h2>See Also</h2>
+<a name="idm153"></a><h2>See Also</h2>
 <p>
       <a class="citerefentry" href="waffle.7.html"><span class="citerefentry"><span class="refentrytitle">waffle</span>(7)</span></a>
     </p>
